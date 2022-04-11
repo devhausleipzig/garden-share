@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       <ChakraProvider>
+        <MockHeader />
         <Component {...pageProps} />
       </ChakraProvider>
     </div>

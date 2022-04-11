@@ -1,8 +1,9 @@
 .container {
   display: flex;
   align-items: center;
-  justify-items: space-between;
+  justify-content: space-between;
   height: 2rem;
   width: 100vw;
   padding: 0.5rem;
+  background-color: red;
 }

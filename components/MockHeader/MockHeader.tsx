@@ -1,19 +1,29 @@
 import type { NextPage } from "next";
 
-import styles from "../styles/MockHeader.module.css";
-import { Link } from "@chakra-ui/react";
+import styles from "../../styles/MockHeader.module.css";
+import Link from "next/link";
 
 const MockHeader: NextPage = () => {
   return (
     <div className={styles.container}>
-      <Link href="/">Home</Link>
-      <Link href="/calendar">Calendar</Link>
-      <Link href="/login">Login</Link>
-      <Link href="/signup">SignUp</Link>
-      <Link href="/message-board">Messages</Link>
-      <Link href="/tasks">Tasks</Link>
-      <Link href="/booking">Booking</Link>
-      <Link href="/admin">Admin</Link>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      <Link href="/calendar">
+        <a>Calendar</a>
+      </Link>
+      <Link href="/messageBoard">
+        <a>Messages</a>
+      </Link>
+      <Link href="/tasks">
+        <a>Tasks</a>
+      </Link>
+      <Link href="/booking">
+        <a>Booking</a>
+      </Link>
+      <Link href="/admin">
+        <a>Admin</a>
+      </Link>
     </div>
   );
 };
