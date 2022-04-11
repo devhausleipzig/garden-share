@@ -1,10 +1,21 @@
+import { PhoneIcon } from "@chakra-ui/icons";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Checkbox,
+  Stack,
+  Link,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Container,
+  HStack,
+} from "@chakra-ui/react";
 
-const Login = ()=>{
-    return(
-        <>
-        Login
-        </>
-    )
+export default function Login() {
+  return <></>;
 }
-
-export default Login
