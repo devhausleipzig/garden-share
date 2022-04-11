@@ -1,10 +1,18 @@
 
-const Signup = ()=>{
-    return(
-        <>
-        signup
+
+
+const Signup = () => {
+    return (
+
+        <> 
+        Signup
         </>
     )
 }
 
 export default Signup
+
+
+
+
+
