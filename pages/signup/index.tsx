@@ -113,7 +113,7 @@ const SignUp = () => {
                       bg: "blue.500",
                     }}
                   >
-                    Sign in
+                    Sign Up
                   </Button>
                 </Stack>
               </form>
