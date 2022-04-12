@@ -1,8 +1,5 @@
-import { Box, Button, ButtonGroup, Center } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
-import { Stack, HStack, VStack } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import { Box, Button, Center, Text } from "@chakra-ui/react";
 
 type AddTaskButtonProps = {
   clickHandler: () => void;
@@ -11,20 +8,19 @@ type AddTaskButtonProps = {
 const AddTaskButton = ({ clickHandler }: AddTaskButtonProps) => {
   return (
     <Button
-      // width="20vw"
       height="10vh"
-      border="2px"
+      border={0.5}
       borderColor="blackAlpha.300"
       color="blackAlpha.300"
       borderStyle="dotted"
       _hover={{ textColor: "blackAlpha.600", borderColor: "blackAlpha.600" }}
-      p="4rem"
+      p={16}
       onClick={clickHandler}
-      minW="18rem"
+      minW={72}
     >
       <Center>
         <Box display="flex" justifyContent="center" alignItems="center">
-          <AddIcon m="1rem" />
+          <AddIcon m={4} />
           <Text>Add Task</Text>
         </Box>
       </Center>
