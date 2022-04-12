@@ -8,6 +8,7 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@chakra-ui/storybook-addon",
+    "@storybook/addon-a11y",
   ],
   framework: "@storybook/react",
   typescript: { reactDocgen: false },
