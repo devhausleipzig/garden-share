@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import styles from "../../styles/MockHeader.module.css";
+import styles from "./MockHeader.module.css";
 import Link from "next/link";
 
 const MockHeader: NextPage = () => {

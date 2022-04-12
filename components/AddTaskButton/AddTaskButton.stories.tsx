@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import AddTaskButton from "../components/AddTaskButton/AddTaskButton";
+import AddTaskButton from "./AddTaskButton";
 
 export default {
   title: "Component/AddTaskButton",

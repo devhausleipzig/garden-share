@@ -1,5 +1,4 @@
-import styles from "../../styles/AddTaskButton.module.css";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Center } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { Stack, HStack, VStack } from "@chakra-ui/react";
@@ -12,20 +11,23 @@ type AddTaskButtonProps = {
 const AddTaskButton = ({ clickHandler }: AddTaskButtonProps) => {
   return (
     <Button
-      width="20vw"
+      // width="20vw"
       height="10vh"
       border="2px"
       borderColor="blackAlpha.300"
       color="blackAlpha.300"
       borderStyle="dotted"
       _hover={{ textColor: "blackAlpha.600", borderColor: "blackAlpha.600" }}
-      display="flex"
-      justifyContent="space-between"
       p="4rem"
       onClick={clickHandler}
+      minW="18rem"
     >
-      <AddIcon />
-      <Text>Add Task</Text>
+      <Center>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <AddIcon m="1rem" />
+          <Text>Add Task</Text>
+        </Box>
+      </Center>
     </Button>
   );
 };

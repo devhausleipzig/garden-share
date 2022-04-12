@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import MockHeader from "../components/MockHeader/MockHeader";
+import MockHeader from "./MockHeader";
 
 export default {
   title: "Test/Header",
