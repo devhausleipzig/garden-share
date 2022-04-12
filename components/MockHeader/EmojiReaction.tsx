@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Picker from 'emoji-picker-react';
 import AddEmoji from './AddEmoji'
-import { Flex } from '@chakra-ui/react';
+import { Flex, IconButton } from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
 
 interface emojiEvent {
     event: any,
@@ -15,6 +16,8 @@ interface EmojiProps {
 }
 
 const EmojiReaction = () => {
+//TODO: add props. to pass the orginal values from database
+//TODO: add logic, to prevent user from add more than Emoji for each message
 
     const [emojis, setEmojis] = useState<EmojiProps[]>([
         {
@@ -59,7 +62,8 @@ const EmojiReaction = () => {
                 {drawEmojis}
 
                 <span onClick={showPicker} >
-                    ➕
+                    
+                <IconButton icon={<AddIcon />} aria-label={''}  size={'sm'} />
                 </span>
             </Flex>
             {pickerBox && <Picker onEmojiClick={onEmojiClick} />}

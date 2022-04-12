@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface EmojiProps{
@@ -12,8 +13,9 @@ export default function AddEmoji({emoji, count}:EmojiProps){
         setCounter(counter => counter + 1);
       };
     return(
-        <span onClick={increase} >
+      
+        <Button onClick={increase} size={'sm'}  padding={1} >
             {`${emoji} ${counter}`}
-        </span>
+        </Button>
     )
 }
