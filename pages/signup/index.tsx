@@ -47,13 +47,18 @@ const SignUp = () => {
       bg={useColorModeValue("gray.50", "gray.800")}
     >
       <HStack
+        minH={"80vh"}
+        minW={"80vw"}
         spacing={0}
         bg={useColorModeValue("white", "gray.700")}
         rounded={"lg"}
         overflow={"hidden"}
       >
-        <Stack>
+        <Stack overflow={"clip"}>
           <Image
+            maxH={"80vh"}
+            minW={"40vw"}
+            objectFit="cover"
             src="https://i.pinimg.com/564x/dc/7c/86/dc7c8600fe552d7c74438f32666cf5bf.jpg"
             alt="splash"
           />
