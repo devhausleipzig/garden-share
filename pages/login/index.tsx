@@ -37,17 +37,17 @@ const Login = () => {
 
   return (
     <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      alignItems={"center"}
+      minH="100vh"
+      align="center"
+      justify="center"
+      alignItems="center"
       bg={useColorModeValue("gray.50", "gray.800")}
     >
       <HStack
         spacing={0}
         bg={useColorModeValue("white", "gray.700")}
-        rounded={"lg"}
-        overflow={"hidden"}
+        rounded="lg"
+        overflow="hidden"
       >
         <Stack>
           <Image
@@ -56,8 +56,8 @@ const Login = () => {
           />
         </Stack>
 
-        <Stack maxW={"lg"}>
-          <Stack align={"center"}>
+        <Stack maxW="lg">
+          <Stack align="center">
             <Image
               borderRadius="full"
               boxSize="150px"
@@ -92,9 +92,9 @@ const Login = () => {
                     <Link onClick={go2oSignup}>SignUp</Link>
                   </Text>
                   <Button
-                    type={"submit"}
-                    bg={"blue.400"}
-                    color={"white"}
+                    type="submit"
+                    bg="blue.400"
+                    color="white"
                     _hover={{
                       bg: "blue.500",
                     }}

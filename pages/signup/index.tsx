@@ -40,32 +40,31 @@ const SignUp = () => {
 
   return (
     <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      alignItems={"center"}
+      minH="100vh"
+      align="center"
+      justify="center"
+      alignItems="center"
       bg={useColorModeValue("gray.50", "gray.800")}
     >
       <HStack
         spacing={0}
         bg={useColorModeValue("white", "gray.700")}
-        rounded={"lg"}
-        overflow={"hidden"}
+        rounded="lg"
+        overflow="hidden"
       >
         <Stack>
           <Image
-            minH={"70vh"}
             src="https://i.pinimg.com/564x/dc/7c/86/dc7c8600fe552d7c74438f32666cf5bf.jpg"
             alt="splash"
           />
         </Stack>
 
-        <Stack maxW={"lg"}>
-          <Stack align={"center"}>
+        <Stack maxW="lg">
+          <Stack align="center">
             <Image
-              marginTop={"4"}
               borderRadius="full"
-              boxSize="150px"
+              marginTop="2"
+              boxSize="100px"
               src="https://www.vhv.rs/dpng/d/13-133198_garden-icon-png-transparent-png.png"
               alt="login"
             />
@@ -106,9 +105,9 @@ const SignUp = () => {
                     <Link onClick={go2oLogin}>Login</Link>
                   </Text>
                   <Button
-                    type={"submit"}
-                    bg={"blue.400"}
-                    color={"white"}
+                    type="submit"
+                    bg="blue.400"
+                    color="white"
                     _hover={{
                       bg: "blue.500",
                     }}
