@@ -1,8 +1,13 @@
 import type { NextPage } from "next";
+import EmojiReaction from "../components/MockHeader/EmojiReaction";
 import MockHeader from "../components/MockHeader/MockHeader";
 
 const MessageBoard: NextPage = () => {
-  return <div>test</div>;
+  return <div>
+
+<EmojiReaction />
+
+  </div>;
 };
 
 export default MessageBoard;
