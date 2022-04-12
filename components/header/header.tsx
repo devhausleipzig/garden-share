@@ -15,7 +15,7 @@ import {
 export const Header = () => {
   return (
     <HStack as="header" bg="teal.300" justify="space-between" py={4} px={4}>
-      <Box h={8} w={8} bg="">
+      <Box h={8} w={8}>
         <Image boxSize="" objectFit="cover" alt="Logo" src="Logo.png" />
       </Box>
       <HStack spacing={8} fontSize="xl">
