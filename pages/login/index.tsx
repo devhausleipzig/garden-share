@@ -1,78 +1,99 @@
 import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
-    Stack,
-    Link,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-    Image, Container, HStack
+    Flex, Box, FormControl,FormLabel,
+    Input, Stack, Link, Button, Text,
+    useColorModeValue, Image, HStack
 } from '@chakra-ui/react';
 
-const Login = ()=>{
-    return(
+import { useRouter } from 'next/router';
+import { FormEvent, useState } from 'react';
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const r = useRouter()
+
+    const go2oSignup = () => {
+        r.push('signup')
+    }
+
+    const loginHandler = (e: FormEvent) => {
+        e.preventDefault()
+        console.log('email:', email)
+        console.log('password:', password)
+
+        // clear input fields
+        setEmail('')
+        setPassword('')
+    }
+
+    return (
         <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        alignItems={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <HStack spacing={0} bg={useColorModeValue('white', 'gray.700')} rounded={'lg'} overflow={'hidden'}>
+            minH={'100vh'}
+            align={'center'}
+            justify={'center'}
+            alignItems={'center'}
+            bg={useColorModeValue('gray.50', 'gray.800')}>
+            <HStack spacing={0} bg={useColorModeValue('white', 'gray.700')} rounded={'lg'} overflow={'hidden'}>
 
 
-            <Stack >
-                <Image 
-                src='https://i.pinimg.com/564x/dc/7c/86/dc7c8600fe552d7c74438f32666cf5bf.jpg' 
-                alt='splash' />
-            </Stack>
-
-            <Stack maxW={'lg'}>
-                <Stack align={'center'}>
+                <Stack >
                     <Image
-                        borderRadius='full'
-                        boxSize='150px'
-                        src='https://www.vhv.rs/dpng/d/13-133198_garden-icon-png-transparent-png.png'
-                        alt='login'
-                    />
-
+                        src='https://i.pinimg.com/564x/dc/7c/86/dc7c8600fe552d7c74438f32666cf5bf.jpg'
+                        alt='splash' />
                 </Stack>
-                <Box
 
-                    bg={useColorModeValue('white', 'gray.700')}
-                    p={4}>
-                    <Stack spacing={4}>
-                        <FormControl id="email">
-                            <FormLabel>Email address</FormLabel>
-                            <Input type="email" />
-                        </FormControl>
-                        <FormControl id="password">
-                            <FormLabel>Password</FormLabel>
-                            <Input type="password" />
-                        </FormControl>
-                        <Stack spacing={10}>
-                            <Text fontSize='md'>Don&lsquo;t have an account? 	&nbsp;
-                                <Link>SignUp</Link>
-                            </Text>
-                            <Button
-                                bg={'blue.400'}
-                                color={'white'}
-                                _hover={{
-                                    bg: 'blue.500',
-                                }}>
-                                Sign in
-                            </Button>
-                        </Stack>
+                <Stack maxW={'lg'}>
+                    <Stack align={'center'}>
+                        <Image
+                            borderRadius='full'
+                            boxSize='150px'
+                            src='https://www.vhv.rs/dpng/d/13-133198_garden-icon-png-transparent-png.png'
+                            alt='login'
+                        />
+
                     </Stack>
-                </Box>
-            </Stack>
+                    <Box
 
-        </HStack>
-    </Flex>
+                        bg={useColorModeValue('white', 'gray.700')}
+                        p={4}>
+                        <Stack spacing={4}>
+                            <form onSubmit={loginHandler}>
+                                <FormControl id="email">
+                                    <FormLabel>Email address</FormLabel>
+                                    <Input type="email"
+                                        required={true}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </FormControl>
+                                <FormControl id="password">
+                                    <FormLabel>Password</FormLabel>
+                                    <Input type="password"
+                                        required={true}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </FormControl>
+                                <Stack spacing={10} mt={2}>
+                                    <Text fontSize='md'>Don&lsquo;t have an account? 	&nbsp;
+                                        <Link onClick={go2oSignup} >SignUp</Link>
+                                    </Text>
+                                    <Button type={'submit'}
+                                        bg={'blue.400'}
+                                        color={'white'}
+                                        _hover={{
+                                            bg: 'blue.500',
+                                        }}>
+                                        Sign in
+                                    </Button>
+                                </Stack>
+                            </form>
+                        </Stack>
+                    </Box>
+                </Stack>
+
+            </HStack>
+        </Flex>
 
 
     )
