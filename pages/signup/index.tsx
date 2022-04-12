@@ -56,9 +56,7 @@ const SignUp = () => {
       >
         <Stack overflow={"clip"}>
           <Image
-            maxH={"80vh"}
-            minW={"40vw"}
-            objectFit="cover"
+            minH={"80vh"}
             src="https://i.pinimg.com/564x/dc/7c/86/dc7c8600fe552d7c74438f32666cf5bf.jpg"
             alt="splash"
           />
