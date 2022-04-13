@@ -1,18 +1,26 @@
 import { Box, VStack, Image, HStack, Text, Button } from "@chakra-ui/react";
-import { useState } from "react";
 
-type TaskCardProps = {
+export type Status = "overdue" | "due soon" | "not urgent";
+
+export type TaskCardProps = {
   clickHandler: () => void;
   buttonClickHandler: () => void;
-  status: "overdue" | "due soon" | "not urgent";
+  status: Status;
+  title: string;
+  description: string;
+  assigned?: boolean;
+  stars: number;
 };
 
 const TaskCard = ({
   clickHandler,
   buttonClickHandler,
   status,
+  title,
+  description,
+  assigned,
+  stars,
 }: TaskCardProps) => {
-  // const [taskStatus, setTaskStatus] = useState<string>("not urgent");
   return (
     <HStack
       border={0.5}
@@ -40,7 +48,7 @@ const TaskCard = ({
       >
         <Box>
           <Text fontWeight="bold" fontSize="2xl" color="#401743">
-            Seeding
+            {title}
           </Text>
           <Box
             display="inline-block"
@@ -63,10 +71,7 @@ const TaskCard = ({
             </Text>
           </Box>
           <Text color="#401743" noOfLines={4}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-            ipsum, atque architecto cumque vel in asperiores facere, dolor amet
-            voluptate laborum at nostrum error earum dolorum nobis saepe dicta
-            tempore?
+            {description}
           </Text>
         </Box>
 
@@ -74,7 +79,9 @@ const TaskCard = ({
           <Button bg="#1287aa" color="#fffbfa" onClick={buttonClickHandler}>
             Sign Up for task
           </Button>
-          <Text color="rgba(64,23,67,0.4)">+2 Stars</Text>
+          <Text color="rgba(64,23,67,0.4)">{`+ ${stars} ${
+            stars === 1 ? "Star" : "Stars"
+          }`}</Text>
         </HStack>
       </VStack>
     </HStack>
