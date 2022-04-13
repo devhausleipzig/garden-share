@@ -54,7 +54,7 @@ const EmojiReaction = ( {userId ,emojiProps}:EmojiPropsArray) => {
   console.log;
   return (
     <>
-      <Flex gap={2} userSelect={"none"} cursor={"pointer"}>
+      <Flex gap={2} userSelect={"none"} cursor={"pointer"} padding={2}>
         {drawEmojis}
 
         <span onClick={showPicker}>

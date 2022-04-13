@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 interface EmojiProps {
@@ -8,43 +8,48 @@ interface EmojiProps {
     count: number;
 }
 
-interface Style {
-    border: string
-    backgroundColor: string
-}
 
 export default function AddEmoji({ userId, users, emoji, count }: EmojiProps) {
     const [counter, setCounter] = useState(count);
-    const [activeEmoji, setActiveEmoji] = useState(true);
- 
+    const [activeEmoji, setActiveEmoji] = useState(false);
+
     useEffect((): void => {
         let checkUser = users?.some((usr) => userId === usr)
-        if (checkUser) {
-    
-            // style.border = '2px solid #27BBAD'
-            // style.backgroundColor = "rgba(39, 187,  173, 0.2)"
-            setActiveEmoji(false)
-
-        }
-
+        if (checkUser) setActiveEmoji(true)
     }, []);
 
-const increase = () => {
-    let checkUser = users?.some((usr) => userId === usr)
+    const increase = () => {
+        let checkUser = users?.some((usr) => userId === usr)
 
-    if (!checkUser) {
-        setCounter(counter => counter + 1);
-        users?.push(userId);
-        setActiveEmoji(false)
-    } else {
-        setActiveEmoji(false)
-    }
-};
+        if (!checkUser) {
+            setCounter(counter => counter + 1);
+            users?.push(userId);
+            setActiveEmoji(true)
+        } else {
+            setActiveEmoji(true)
+        }
+    };
 
-return (
+    return (
 
-    <Button onClick={increase} size={'sm'} padding={1} isActive={activeEmoji}  >
-        {`${emoji} ${counter}`}
-    </Button>
-)
+        <Button onClick={increase} size={'sm'} paddingX={3} rounded={'xl'} isActive={activeEmoji} _active={{
+            bg: 'rgba(39, 187,  173, 0.2)',
+            border: '2px solid #27BBAD',
+        }}
+            _focus={{
+                boxShadow:
+                    'none',
+            }}
+        >
+            <Flex gap={2}>
+                <span>
+                    {emoji}
+
+                </span>
+                <span>
+                    {counter}
+                </span>
+            </Flex>
+        </Button>
+    )
 }
