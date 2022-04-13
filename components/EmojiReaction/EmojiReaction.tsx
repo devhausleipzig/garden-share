@@ -27,15 +27,14 @@ const EmojiReaction = ({ userId, emojiProps }: EmojiPropsArray) => {
 
   const [chosenEmoji, setChosenEmoji] = useState(null);
 
-function renderComponent(value:number, index: number){
-  console.log('render func')
-  console.log(emojis)
-  emojis.splice(index,1)
-  setEmojis(emojis)
-  
-}
+  function renderComponent(value: number, index: number) {
+    console.log("render func");
+    console.log(emojis);
+    emojis.splice(index, 1);
+    setEmojis(emojis);
+  }
 
-const arr1 = ['v']
+  const arr1 = ["v"];
 
   const showPicker = () => {
     console.log("clicked");
@@ -64,7 +63,7 @@ const arr1 = ['v']
     return (
       <AddEmoji
         key={index}
-        index = {index}
+        index={index}
         userId={userId}
         users={emj.users}
         emoji={emj.emoji}

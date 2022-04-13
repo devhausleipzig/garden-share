@@ -5,12 +5,7 @@ import MockHeader from "../components/MockHeader/MockHeader";
 const MessageBoard: NextPage = () => {
   return (
     <div>
-      <EmojiReaction
-        userId={"id1"}
-        emojiProps={[
-       
-        ]}
-      />
+      <EmojiReaction userId={"id1"} emojiProps={[]} />
     </div>
   );
 };
