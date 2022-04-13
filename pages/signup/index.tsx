@@ -47,15 +47,17 @@ const SignUp = () => {
       bg={useColorModeValue("gray.50", "gray.800")}
     >
       <HStack
-        spacing={0}
+        spacing="4"
         bg={useColorModeValue("white", "gray.700")}
         rounded="lg"
         overflow="hidden"
+        maxH="80vh"
       >
         <Stack>
           <Image
             src="https://i.pinimg.com/564x/dc/7c/86/dc7c8600fe552d7c74438f32666cf5bf.jpg"
             alt="splash"
+            minH="80vh"
           />
         </Stack>
 
@@ -63,14 +65,14 @@ const SignUp = () => {
           <Stack align="center">
             <Image
               borderRadius="full"
-              marginTop="2"
-              boxSize="100px"
+              boxSize="150px"
               src="https://www.vhv.rs/dpng/d/13-133198_garden-icon-png-transparent-png.png"
               alt="login"
+              marginTop="16"
             />
           </Stack>
-          <Box bg={useColorModeValue("white", "gray.700")} p={4}>
-            <Stack spacing={4}>
+          <Box bg={useColorModeValue("white", "gray.700")} p="12">
+            <Stack spacing="4">
               <form onSubmit={loginHandler}>
                 <FormControl id="name">
                   <FormLabel>Name</FormLabel>
@@ -99,7 +101,7 @@ const SignUp = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </FormControl>
-                <Stack spacing={10} mt={2}>
+                <Stack spacing="10" mt="2">
                   <Text fontSize="md">
                     Already have an account? &nbsp;
                     <Link onClick={go2oLogin}>Login</Link>
