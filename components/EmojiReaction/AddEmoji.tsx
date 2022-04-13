@@ -7,10 +7,17 @@ interface EmojiProps {
   emoji: string;
   count: number;
   index: number;
-  renderAgain: (value:number, index:number)=> void
+  renderAgain: (value: number, index: number) => void;
 }
 
-export default function AddEmoji({renderAgain ,userId, users, emoji, count ,index}: EmojiProps) {
+export default function AddEmoji({
+  renderAgain,
+  userId,
+  users,
+  emoji,
+  count,
+  index,
+}: EmojiProps) {
   const [counter, setCounter] = useState(count);
   const [activeEmoji, setActiveEmoji] = useState(false);
 
@@ -31,37 +38,41 @@ export default function AddEmoji({renderAgain ,userId, users, emoji, count ,inde
         let userIndex = users.indexOf(userId);
         if (userIndex != -1) users.splice(userIndex, 1);
 
-        renderAgain(counter, index)
+        renderAgain(counter, index);
 
         if (counter < 1) {
         }
         setCounter((counter) => counter - 1);
         setActiveEmoji(false);
-     
       }
     }
   };
-
+  // Just render the component when we have a count
   return (
-    <Button
-      onClick={increase}
-      size={"sm"}
-      paddingX={3}
-      rounded={"xl"}
-      isActive={activeEmoji}
-      _active={{
-        bg: "rgba(39, 187,  173, 0.2)",
-        border: "2px solid #27BBAD",
-        color: "#27BBAD",
-      }}
-      _focus={{
-        boxShadow: "none",
-      }}
-    >
-      <Flex gap={2}>
-        <span>{emoji}</span>
-        <span>{counter}</span>
-      </Flex>
-    </Button>
+    <>
+      {counter ? (
+        <Button
+          onClick={increase}
+          size={"sm"}
+          paddingX={3}
+          rounded={"xl"}
+          isActive={activeEmoji}
+          _active={{
+            bg: "rgba(39, 187,  173, 0.2)",
+            border: "2px solid #27BBAD",
+            color: "#27BBAD",
+          }}
+          _focus={{
+            boxShadow: "none",
+          }}
+        >
+          <Flex gap={2}>
+            <span>{emoji}</span>
+            <span>{counter}</span>
+          </Flex>
+        </Button>
+      ) : //  if we dont have a count we render null which is basically non existent
+      null}
+    </>
   );
 }
