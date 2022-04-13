@@ -25,7 +25,15 @@ export default function AddEmoji({ userId, users, emoji, count }: EmojiProps) {
       users?.push(userId);
       setActiveEmoji(true);
     } else {
-      setActiveEmoji(true);
+      if (checkUser) {
+        let userIndex = users.indexOf(userId);
+        if (userIndex != -1) users.splice(userIndex, 1);
+        setCounter((counter) => counter - 1);
+        setActiveEmoji(false);
+        // if (counter === 0) {
+        // }
+        console.log(users);
+      }
     }
   };
 

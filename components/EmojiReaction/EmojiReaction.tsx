@@ -48,6 +48,8 @@ const EmojiReaction = ({ userId, emojiProps }: EmojiPropsArray) => {
   };
 
   const drawEmojis = emojis.map((emj, index) => {
+    if (emj.count == 0) return;
+
     return (
       <AddEmoji
         key={index}
