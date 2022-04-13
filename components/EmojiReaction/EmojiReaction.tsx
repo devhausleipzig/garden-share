@@ -42,7 +42,7 @@ const EmojiReaction = () => {
         ...emojis,
         {
           emoji: emojiObject.emoji,
-          count: 0,
+          count: 1,
         },
       ];
     });
