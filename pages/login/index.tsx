@@ -74,7 +74,7 @@ const Login = () => {
                   <FormLabel>Email address</FormLabel>
                   <Input
                     type="email"
-                    required={true}
+                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -83,7 +83,7 @@ const Login = () => {
                   <FormLabel>Password</FormLabel>
                   <Input
                     type="password"
-                    required={true}
+                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
