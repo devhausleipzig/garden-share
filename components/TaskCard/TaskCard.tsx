@@ -62,13 +62,7 @@ const TaskCard = ({
             rounded="lg"
             px={2}
           >
-            <Text color="#fffbfa">
-              {status === "overdue"
-                ? "overdue"
-                : status === "due soon"
-                ? "due soon"
-                : "not urgent"}
-            </Text>
+            <Text color="#fffbfa">{status}</Text>
           </Box>
           <Text color="#401743" noOfLines={4}>
             {description}
