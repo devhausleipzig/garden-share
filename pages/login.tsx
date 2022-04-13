@@ -14,9 +14,11 @@ import {
 } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { useAuth } from "../context/authContext";
 
 const Login = () => {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const r = useRouter();
@@ -27,6 +29,8 @@ const Login = () => {
 
   const loginHandler = (e: FormEvent) => {
     e.preventDefault();
+    login(email, password);
+    r.push("/");
     console.log("email:", email);
     console.log("password:", password);
 

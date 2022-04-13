@@ -12,6 +12,7 @@ module.exports = {
   ],
   framework: "@storybook/react",
   typescript: { reactDocgen: false },
+  staticDirs: ["../public"],
   core: {
     builder: "@storybook/builder-webpack5",
   },
