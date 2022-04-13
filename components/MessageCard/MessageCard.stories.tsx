@@ -16,5 +16,24 @@ const Template: ComponentStory<typeof MessageCard> = (args) => (
   <MessageCard {...args} />
 );
 
-export const Default = Template.bind({});
+export const LargeCard = Template.bind({});
+LargeCard.args = {
+  type: "LargeCard",
+  title: "BBQ Time",
+  content:
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, vero mollitia consectetur error tenetur hic atque magnam iste! Aliquid, aspernatur!",
+  date: "Today",
+  user: { name: "Dan Abramov", image: "https://bit.ly/dan-abramov" },
+  img: "/bbq.jpg",
+};
+export const SmallCard = Template.bind({});
+SmallCard.args = {
+  type: "SmallCard",
+  title: "BBQ Time",
+  content:
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, vero mollitia consectetur error tenetur hic atque magnam iste! Aliquid, aspernatur!",
+  date: "Today",
+  user: { name: "Dan Abramov", image: "https://bit.ly/dan-abramov" },
+  img: "",
+};
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

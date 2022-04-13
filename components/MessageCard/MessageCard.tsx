@@ -16,15 +16,36 @@ import {
 import Link from "next/link";
 import React from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import EmojiReaction from "../EmojiReaction/EmojiReaction";
 
-const MessageCard: NextPage = () => {
-  const [show, setShow] = React.useState(false);
+type User = {
+  name: string;
+  image: string;
+};
+
+type Message = {
+  type: "LargeCard" | "SmallCard";
+  title: string;
+  content: string;
+  date: string;
+  user: User;
+  img?: string;
+};
+
+const colors = {
+  buttons: "#27BBAD",
+  offwhite: "#FFFBFA",
+  text: "#401743",
+};
+
+const MessageCard = ({ type, title, content, date, user, img }: Message) => {
+  const [show, setShow] = React.useState(type === "LargeCard" ? true : false);
   const handleToggle = () => setShow(!show);
   return (
     <>
       <Center>
         <Flex
-          backgroundColor="tomato"
+          backgroundColor={colors.offwhite}
           w="66%"
           px="6"
           py="6"
@@ -35,37 +56,53 @@ const MessageCard: NextPage = () => {
         >
           <Flex gap="6">
             <Image
-              src="https://bit.ly/dan-abramov"
-              alt="Dan Abramov"
+              src={"https://bit.ly/dan-abramov"}
+              alt={"Dan Abramov"}
               boxSize="100px"
               objectFit="cover"
               borderRadius={15}
             />
-            <Flex flexDirection="column" gap="6">
-              <Collapse startingHeight={100} in={show}>
-                <Flex alignItems="center" gap="6">
-                  <Text fontSize="xl">Yooo - Nice BBQ coming up</Text>
-                  <Text fontSize="xs">13/04/22 14:23</Text>
-                </Flex>
-                <Text>
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life
-                  accusamus terry richardson ad squid. Nihil anim keffiyeh
-                  helvetica, craft beer labore wes anderson cred nesciunt
-                  sapiente ea proident.
+            <Flex flexDirection="column" gap="2">
+              <Flex alignItems="center" gap="6">
+                <Text fontSize="xl" textColor={colors.text}>
+                  {title ? title : "Yooo - Nice BBQ coming up"}
                 </Text>
-              </Collapse>
+                <Text fontSize="xs" textColor={colors.text}>
+                  {date ? date : "13/04/22 14:23"}
+                </Text>
+              </Flex>
+              <Flex gap="4" flexDir="column">
+                {type === "LargeCard" && (
+                  <Image
+                    src={img ? img : "./bbq.jpg"}
+                    alt="bbq"
+                    objectFit="cover"
+                    borderRadius={15}
+                    mt="4"
+                  />
+                )}
+                <Text textColor={colors.text} noOfLines={!show ? 1 : undefined}>
+                  {content
+                    ? content
+                    : `Anim pariatur cliche reprehenderit, enim eiusmod high life
+                    accusamus terry richardson ad squid. Nihil anim keffiyeh
+                    helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea proident.`}
+                </Text>
+              </Flex>
               <Flex alignItems="center" gap="2">
-                {/* pladceholder for emoji component */}
-                <Button size="xs">😍</Button>
-                <Button size="xs">🤠</Button>
-                <Button size="xs">🤧</Button>
+                <EmojiReaction />
                 <Spacer></Spacer>
-                <IconButton
-                  size="xs"
-                  onClick={handleToggle}
-                  aria-label="Search database"
-                  icon={show ? <ChevronUpIcon /> : <ChevronDownIcon />}
-                />
+                {type === "SmallCard" && (
+                  <IconButton
+                    backgroundColor={colors.buttons}
+                    textColor={colors.offwhite}
+                    size="sm"
+                    onClick={handleToggle}
+                    aria-label="Search database"
+                    icon={show ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                  />
+                )}
               </Flex>
             </Flex>
           </Flex>

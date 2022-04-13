@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Picker from "emoji-picker-react";
 import AddEmoji from "./AddEmoji";
-import { Flex, IconButton } from "@chakra-ui/react";
+import { Box, Flex, IconButton } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
 interface emojiEvent {
@@ -13,6 +13,12 @@ interface EmojiProps {
   emoji: string;
   count: number;
 }
+
+const colors = {
+  buttons: "#27BBAD",
+  offwhite: "#FFFBFA",
+  text: "#401743",
+};
 
 const EmojiReaction = () => {
   //TODO: add props. to pass the orginal values from database
@@ -51,17 +57,29 @@ const EmojiReaction = () => {
   const drawEmojis = emojis.map((emj, index) => {
     return <AddEmoji key={index} emoji={emj.emoji} count={emj.count} />;
   });
-  console.log;
+  const handleSubmit = (e: { preventDefault: () => void; code: string }) => {
+    if (e.code === "Escape") {
+      setPickerBox(false);
+    }
+  };
   return (
     <>
       <Flex gap={2} userSelect={"none"} cursor={"pointer"}>
         {drawEmojis}
 
         <span onClick={showPicker}>
-          <IconButton icon={<AddIcon />} aria-label={""} size={"sm"} />
+          <IconButton
+            icon={<AddIcon />}
+            aria-label={""}
+            size={"sm"}
+            backgroundColor={colors.buttons}
+            textColor={colors.offwhite}
+          />
         </span>
       </Flex>
-      {pickerBox && <Picker onEmojiClick={onEmojiClick} />}
+      <Box pos="absolute">
+        {pickerBox && <Picker onEmojiClick={onEmojiClick} />}
+      </Box>
     </>
   );
 };
