@@ -8,7 +8,17 @@ const MessageBoard: NextPage = () => {
       <EmojiReaction
         userId={"id1"}
         emojiProps={[
-          {
+       
+        ]}
+      />
+    </div>
+  );
+};
+
+export default MessageBoard;
+
+/*
+   {
             users: ["id1", "id2"],
             emoji: "🐑",
             count: 0,
@@ -18,10 +28,4 @@ const MessageBoard: NextPage = () => {
             emoji: "😁",
             count: 0,
           },
-        ]}
-      />
-    </div>
-  );
-};
-
-export default MessageBoard;
+          */
