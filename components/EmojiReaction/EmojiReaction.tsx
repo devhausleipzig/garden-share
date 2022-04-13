@@ -23,22 +23,25 @@ interface EmojiPropsArray {
 const EmojiReaction = ({ userId, emojiProps }: EmojiPropsArray) => {
   const [emojis, setEmojis] = useState<EmojiProps[]>(emojiProps);
   const [pickerBox, setPickerBox] = useState(false);
-  const [tmp, setTmp] = useState(0);
 
   const [chosenEmoji, setChosenEmoji] = useState(null);
 
 function renderComponent(value:number, index: number){
-  console.log('render func')
-  console.log(emojis)
+  console.log('before',emojis)
   emojis.splice(index,1)
-  setEmojis(emojis)
+
+  const newEmojis =  Array.from(emojis)
+  setTimeout(()=>{
+    setEmojis(newEmojis)
+
+  }, 20)
+  console.log('after',newEmojis)
+
   
 }
 
-const arr1 = ['v']
-
   const showPicker = () => {
-    console.log("clicked");
+    console.log("showPicker:clicked");
     setPickerBox(true);
   };
 
@@ -69,7 +72,7 @@ const arr1 = ['v']
         users={emj.users}
         emoji={emj.emoji}
         count={emj.count}
-        rendeAgain={renderComponent}
+        renderAgain={renderComponent}
       />
     );
   });

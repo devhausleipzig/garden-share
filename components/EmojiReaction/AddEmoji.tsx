@@ -7,10 +7,10 @@ interface EmojiProps {
   emoji: string;
   count: number;
   index: number;
-  rendeAgain: (value:number, index:number)=> void
+  renderAgain: (value:number, index:number)=> void
 }
 
-export default function AddEmoji({rendeAgain ,userId, users, emoji, count ,index}: EmojiProps) {
+export default function AddEmoji({renderAgain ,userId, users, emoji, count ,index}: EmojiProps) {
   const [counter, setCounter] = useState(count);
   const [activeEmoji, setActiveEmoji] = useState(false);
 
@@ -31,7 +31,7 @@ export default function AddEmoji({rendeAgain ,userId, users, emoji, count ,index
         let userIndex = users.indexOf(userId);
         if (userIndex != -1) users.splice(userIndex, 1);
 
-        rendeAgain(counter, index)
+        renderAgain(counter, index)
 
         if (counter < 1) {
         }
