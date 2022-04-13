@@ -35,18 +35,18 @@ const DateSelector = () => {
         />
       </HStack>
       <Select variant="filled" placeholder="Select Month" w="20%">
-        <option value="option1">January</option>
-        <option value="option2">February</option>
-        <option value="option3">March</option>
-        <option value="option4">April</option>
-        <option value="option5">May</option>
-        <option value="option6">June</option>
-        <option value="option7">July</option>
-        <option value="option8">August</option>
-        <option value="option9">September</option>
-        <option value="option10">October</option>
-        <option value="option11">November</option>
-        <option value="option12">December</option>
+        <option value="january">January</option>
+        <option value="february">February</option>
+        <option value="march">March</option>
+        <option value="april">April</option>
+        <option value="may">May</option>
+        <option value="june">June</option>
+        <option value="july">July</option>
+        <option value="august">August</option>
+        <option value="september">September</option>
+        <option value="october">October</option>
+        <option value="november">November</option>
+        <option value="december">December</option>
       </Select>
       <IconButton
         color="#FFFBFA"
