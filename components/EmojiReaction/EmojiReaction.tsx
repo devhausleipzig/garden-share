@@ -10,18 +10,17 @@ interface emojiEvent {
 }
 
 interface EmojiProps {
-  users?:string[], // ['id1', 'id2']
+  users?: string[]; // ['id1', 'id2']
   emoji: string;
   count: number;
 }
 
-interface EmojiPropsArray{
-  userId: string,
-  emojiProps: EmojiProps[]
+interface EmojiPropsArray {
+  userId: string;
+  emojiProps: EmojiProps[];
 }
 
-const EmojiReaction = ( {userId ,emojiProps}:EmojiPropsArray) => {
-
+const EmojiReaction = ({ userId, emojiProps }: EmojiPropsArray) => {
   const [emojis, setEmojis] = useState<EmojiProps[]>(emojiProps);
   const [pickerBox, setPickerBox] = useState(false);
 
@@ -40,7 +39,7 @@ const EmojiReaction = ( {userId ,emojiProps}:EmojiPropsArray) => {
       return [
         ...emojis,
         {
-          users:[userId], // not optimal
+          users: [userId], // not optimal
           emoji: emojiObject.emoji,
           count: 1,
         },
@@ -49,7 +48,15 @@ const EmojiReaction = ( {userId ,emojiProps}:EmojiPropsArray) => {
   };
 
   const drawEmojis = emojis.map((emj, index) => {
-    return <AddEmoji key={index} userId={userId} users={emj.users}  emoji={emj.emoji} count={emj.count} />;
+    return (
+      <AddEmoji
+        key={index}
+        userId={userId}
+        users={emj.users}
+        emoji={emj.emoji}
+        count={emj.count}
+      />
+    );
   });
   console.log;
   return (
