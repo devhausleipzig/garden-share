@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import React from "react";
 import TaskSelectorIcons from "./TaskSelectorIcons";
+import TaskTypeIcons from "./TaskTypeIcons";
 
 type User = {
   name: string;
@@ -27,6 +28,7 @@ type Task = {
   content?: string;
   date?: string;
   user?: User;
+  tasktype: "watering" | "weeding" | "pruning" | "building";
   status: "unchecked" | "checked";
 };
 
@@ -36,7 +38,14 @@ const colors = {
   text: "#401743",
 };
 
-const TaskSelector = ({ title, content, date, user, status }: Task) => {
+const TaskSelector = ({
+  title,
+  content,
+  date,
+  user,
+  status,
+  tasktype,
+}: Task) => {
   const [check, setCheck] = React.useState();
   return (
     <>
@@ -53,7 +62,11 @@ const TaskSelector = ({ title, content, date, user, status }: Task) => {
           textColor={colors.text}
         >
           <Flex justify="space-between" align="center">
-            <Box>Image</Box>
+            {tasktype === "watering" && <TaskTypeIcons iconName={tasktype} />}
+            {tasktype === "weeding" && <TaskTypeIcons iconName={tasktype} />}
+            {tasktype === "pruning" && <TaskTypeIcons iconName={tasktype} />}
+            {tasktype === "building" && <TaskTypeIcons iconName={tasktype} />}
+            {!tasktype && <Box>Image</Box>}
             <Box>Task Name</Box>
             {status === "checked" && <TaskSelectorIcons iconName={status} />}
             {status === "unchecked" && <TaskSelectorIcons iconName={status} />}

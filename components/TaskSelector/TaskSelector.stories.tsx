@@ -24,3 +24,35 @@ Unchecked.args = {
   date: "today",
   status: "unchecked",
 };
+
+export const Watering = Template.bind({});
+Watering.args = {
+  title: "Annoying Task",
+  date: "today",
+  status: "unchecked",
+  tasktype: "watering",
+};
+
+export const Weeding = Template.bind({});
+Weeding.args = {
+  title: "Annoying Task",
+  date: "today",
+  status: "unchecked",
+  tasktype: "weeding",
+};
+
+export const Pruning = Template.bind({});
+Pruning.args = {
+  title: "Annoying Task",
+  date: "today",
+  status: "unchecked",
+  tasktype: "pruning",
+};
+
+export const Building = Template.bind({});
+Building.args = {
+  title: "Annoying Task",
+  date: "today",
+  status: "unchecked",
+  tasktype: "building",
+};
