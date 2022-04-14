@@ -1,13 +1,7 @@
 import { Icon } from "@chakra-ui/icons";
 
 type Props = {
-  iconName:
-    | "unchecked"
-    | "checked"
-    | "watering"
-    | "weeding"
-    | "building"
-    | "pruning";
+  iconName: "unchecked" | "checked";
   color?: string;
 };
 
