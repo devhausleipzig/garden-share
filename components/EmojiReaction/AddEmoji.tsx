@@ -2,12 +2,12 @@ import { Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 interface EmojiProps {
-  userId: string,
-  users?: string[], // ['id1', 'id2']
-  emoji: string,
-  count: number,
-  index: number,
-  emojiID: string,
+  userId: string;
+  users?: string[]; // ['id1', 'id2']
+  emoji: string;
+  count: number;
+  index: number;
+  emojiID: string;
   renderAgain: (emojiID: string) => void;
 }
 
@@ -18,7 +18,7 @@ export default function AddEmoji({
   emoji,
   count,
   index,
-  emojiID
+  emojiID,
 }: EmojiProps) {
   const [counter, setCounter] = useState(count);
   const [activeEmoji, setActiveEmoji] = useState(false);
@@ -36,20 +36,18 @@ export default function AddEmoji({
       setActiveEmoji(true);
     } else {
       if (checkUser && counter > 1) {
-        let userIndex = users.indexOf(userId);
-        if (userIndex != -1) users.splice(userIndex, 1);
+        let userIndex = users?.indexOf(userId);
+        if (userIndex != -1) users?.splice(userIndex!, 1);
         setCounter((counter) => counter - 1);
         setActiveEmoji(false);
       } else if (checkUser && counter <= 1) {
-        renderAgain(emojiID)
+        renderAgain(emojiID);
       }
-
     }
-  }
+  };
 
   return (
     <>
-
       <Button
         onClick={increase}
         size={"sm"}
@@ -70,8 +68,6 @@ export default function AddEmoji({
           <span>{counter}</span>
         </Flex>
       </Button>
-
     </>
   );
 }
-
