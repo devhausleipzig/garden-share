@@ -1,20 +1,19 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
-import MockHeader from "../components/MockHeader/MockHeader";
+import DateSelector from "./DateSelector";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Test/Header",
-  component: MockHeader,
+  title: "MessageBoard/DateSelector",
+  component: DateSelector,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {},
-} as ComponentMeta<typeof MockHeader>;
+  argTypes: {
+    // backgroundColor: { control: "color" },
+  },
+} as ComponentMeta<typeof DateSelector>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof MockHeader> = (args) => (
-  <MockHeader {...args} />
-);
+const Template: ComponentStory<typeof DateSelector> = () => <DateSelector />;
 
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
