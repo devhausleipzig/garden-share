@@ -69,20 +69,32 @@ export default function AddTaskDrawer({
 
           <DrawerBody as={VStack} spacing={5} mt={10}>
             <Select
+              _placeholder={{ color: "#401743", opacity: 0.4 }}
+              borderColor="rgba(64,23,67,0.4)"
               ref={firstField}
               placeholder="Choose type of task"
               focusBorderColor="#1287aa"
               _selected={{ backgroundColor: "#1287aa" }}
+              color="#401743"
             >
               {types.map((type) => (
-                <option value={type}>{type}</option>
+                <option key={type} value={type}>
+                  {type}
+                </option>
               ))}
             </Select>
-            <Input placeholder="Task title" focusBorderColor="#1287aa" />
+            <Input
+              placeholder="Task title"
+              focusBorderColor="#1287aa"
+              _placeholder={{ color: "#401743", opacity: 0.4 }}
+              borderColor="rgba(64,23,67,0.4)"
+              color="#401743"
+            />
             <Box
               borderStyle="solid"
               border="1px"
-              borderColor="#E2E8F0"
+              borderColor="rgba(64,23,67,0.4)"
+              color="#401743"
               w="100%"
               px={4}
               py={2}
@@ -98,7 +110,13 @@ export default function AddTaskDrawer({
                 />
               </HStack>
             </Box>
-            <Textarea placeholder="Describe task" focusBorderColor="#1287aa" />
+            <Textarea
+              _placeholder={{ color: "#401743", opacity: 0.4 }}
+              borderColor="rgba(64,23,67,0.4)"
+              color="#401743"
+              placeholder="Describe task"
+              focusBorderColor="#1287aa"
+            />
           </DrawerBody>
 
           <DrawerFooter>
