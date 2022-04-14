@@ -23,6 +23,9 @@ const colors = {
   buttons: "#27BBAD",
   offwhite: "#FFFBFA",
   text: "#401743",
+  borderFree: "#27BBAD",
+  borderPartial: "#FCB602",
+  borderFull: "#F6886F",
 };
 
 const weather = {
@@ -54,9 +57,17 @@ type Day = {
     | "thunderstorm";
   slots: number;
   path: string;
+  border: "borderFree" | "borderPartial" | "borderFull";
 };
 
-const DayCard = ({ date, weatherStart, weatherEnd, slots, path }: Day) => {
+const DayCard = ({
+  date,
+  weatherStart,
+  weatherEnd,
+  slots,
+  path,
+  border,
+}: Day) => {
   const [day, setDay] = React.useState();
 
   return (
@@ -73,6 +84,8 @@ const DayCard = ({ date, weatherStart, weatherEnd, slots, path }: Day) => {
           borderRadius={15}
           boxShadow="md"
           alignContent="center"
+          border="2px"
+          borderColor={colors[border]}
         >
           <HStack justify="space-between" w="full">
             <Text fontSize="xl">{date && date}</Text>

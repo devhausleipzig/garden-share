@@ -19,6 +19,7 @@ AllFree.args = {
   weatherStart: "fog",
   weatherEnd: "rainSnow",
   slots: 12,
+  border: "borderFree",
 };
 export const FreeSlots = Template.bind({});
 FreeSlots.args = {
@@ -26,6 +27,7 @@ FreeSlots.args = {
   weatherStart: "rain",
   weatherEnd: "sunRain",
   slots: 3,
+  border: "borderPartial",
 };
 export const Full = Template.bind({});
 Full.args = {
@@ -33,6 +35,7 @@ Full.args = {
   weatherStart: "sunSnow",
   weatherEnd: "sun",
   slots: 0,
+  border: "borderFull",
 };
 export const Icons = Template.bind({});
 Icons.args = {
@@ -40,4 +43,5 @@ Icons.args = {
   weatherStart: "thunderstorm",
   weatherEnd: "thunderstorm",
   slots: 0,
+  border: "borderFull",
 };
