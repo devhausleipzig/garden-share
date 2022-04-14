@@ -1,16 +1,17 @@
-import { Stack, HStack, VStack, Box, Button } from "@chakra-ui/react";
-import Link from "next/link";
-import { Image } from "@chakra-ui/react";
-import { ReactNode } from "react";
-import { Avatar } from "@chakra-ui/react";
 import {
+  Avatar,
+  Box,
+  HStack,
+  Image,
   Menu,
   MenuButton,
-  MenuList,
+  MenuDivider,
   MenuGroup,
   MenuItem,
-  MenuDivider,
+  MenuList,
 } from "@chakra-ui/react";
+import Link from "next/link";
+import { ReactNode } from "react";
 
 export const Header = () => {
   return (
@@ -56,7 +57,7 @@ export const Header = () => {
           <MenuDivider />
           <MenuGroup title="Account">
             <MenuItem>
-              <Link href="/logout">
+              <Link href="/">
                 <a>Logout</a>
               </Link>
             </MenuItem>
