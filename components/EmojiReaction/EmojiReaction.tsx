@@ -42,11 +42,36 @@ const EmojiReaction = ({ userId, emojiProps }: EmojiPropsArray) => {
 
   const showPicker = () => {
     console.log("showPicker:clicked");
+
+const colors = {
+  buttons: "#27BBAD",
+  offwhite: "#FFFBFA",
+  text: "#401743",
+};
+
+const EmojiReaction = () => {
+  //TODO: add props. to pass the orginal values from database
+  //TODO: add logic, to prevent user from add more than Emoji for each message
+
+  const [emojis, setEmojis] = useState<EmojiProps[]>([
+    {
+      emoji: "🐑",
+      count: 0,
+    },
+  ]);
+  const [pickerBox, setPickerBox] = useState(false);
+
+  const [chosenEmoji, setChosenEmoji] = useState(null);
+
+  const showPicker = () => {
+    console.log("clicked");
+
     setPickerBox(true);
   };
 
   const onEmojiClick = (_event: any, emojiObject: any) => {
     setPickerBox(false);
+
     // setChosenEmoji(emojiObject);
 
     setEmojis(() => {
@@ -61,6 +86,7 @@ const EmojiReaction = ({ userId, emojiProps }: EmojiPropsArray) => {
       ];
     });
   };
+
   /*
     const drawEmojis = emojis.map((emj, index) => {
       if (emj.count == 0) return;

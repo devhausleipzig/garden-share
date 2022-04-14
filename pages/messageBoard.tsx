@@ -8,6 +8,7 @@ const MessageBoard: NextPage = () => {
       <EmojiReaction userId={"id1"} emojiProps={[]} />
     </div>
   );
+
 };
 
 export default MessageBoard;
