@@ -15,8 +15,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
-import { CheckIcon } from "@chakra-ui/icons";
-import EmojiReaction from "../EmojiReaction/EmojiReaction";
+import TaskSelectorIcons from "./TaskSelectorIcons";
 
 type User = {
   name: string;
@@ -56,8 +55,8 @@ const TaskSelector = ({ title, content, date, user, status }: Task) => {
           <Flex justify="space-between" align="center">
             <Box>Image</Box>
             <Box>Task Name</Box>
-            {status === "checked" && <CheckIcon></CheckIcon>}
-            {status === "unchecked" && <Box></Box>}
+            {status === "checked" && <TaskSelectorIcons iconName={status} />}
+            {status === "unchecked" && <TaskSelectorIcons iconName={status} />}
           </Flex>
         </Flex>
       </Center>
