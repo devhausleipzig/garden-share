@@ -14,13 +14,15 @@ const Template: ComponentStory<typeof TaskSelector> = (args) => (
 
 export const Checked = Template.bind({});
 Checked.args = {
-  title: "Annoying Task",
+  title: "Hard Task",
   date: "today",
   status: "checked",
+  type: "building",
 };
 export const Unchecked = Template.bind({});
 Unchecked.args = {
   title: "Annoying Task",
-  date: "today",
+  date: "Tomorrow",
   status: "unchecked",
+  type: "watering",
 };

@@ -23,11 +23,12 @@ type User = {
 };
 
 type Task = {
-  title?: string;
+  title: string;
   content?: string;
   date?: string;
   user?: User;
   status: "unchecked" | "checked";
+  type: "watering" | "weeding" | "building" | "pruning";
 };
 
 const colors = {
@@ -36,8 +37,12 @@ const colors = {
   text: "#401743",
 };
 
-const TaskSelector = ({ title, content, date, user, status }: Task) => {
-  const [check, setCheck] = React.useState();
+const TaskSelector = ({ title, content, date, user, status, type }: Task) => {
+  const [check, setCheck] = React.useState(status === "checked" ? true : false);
+  const handleToggle = () => setCheck(!check);
+
+  const style = {:focus {box-shadow: none !important}};
+
   return (
     <>
       <Center>
@@ -53,10 +58,17 @@ const TaskSelector = ({ title, content, date, user, status }: Task) => {
           textColor={colors.text}
         >
           <Flex justify="space-between" align="center">
-            <Box>Image</Box>
-            <Box>Task Name</Box>
-            {status === "checked" && <TaskSelectorIcons iconName={status} />}
-            {status === "unchecked" && <TaskSelectorIcons iconName={status} />}
+            <TaskSelectorIcons iconName={type} />
+            {status === "checked" && <Text>{title}</Text>}
+            {status === "unchecked" && <Text as="s">{title}</Text>}
+            <IconButton
+              variant="unstyled"
+              aria-label={"checked-status"}
+              onClick={handleToggle}
+              style={style}
+            >
+              <TaskSelectorIcons iconName={!check ? "unchecked" : "checked"} />
+            </IconButton>
           </Flex>
         </Flex>
       </Center>
