@@ -102,11 +102,10 @@
   > div.react-datepicker-wrapper
   > div
   > input:focus {
-  outline-color: hotpink !important;
+  outline-color: #1287aa !important;
   padding-left: 1rem;
-  border-color: hotpink !important;
 }
-/* #chakra-modal--body-1
+#chakra-modal--body-1
   > div.css-xs6qy3
   > div
   > div.react-datepicker-wrapper
@@ -115,4 +114,4 @@
   padding-left: 1rem;
   background-color: #fffbfa;
   cursor: pointer;
-} */
+}

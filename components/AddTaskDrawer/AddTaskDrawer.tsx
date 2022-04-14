@@ -13,6 +13,7 @@ import {
   Text,
   VStack,
   Box,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -53,6 +54,7 @@ export default function AddTaskDrawer({
 }: AddTaskDrawerProps) {
   const [startDate, setStartDate] = useState(new Date());
   const firstField = useRef(null);
+
   return (
     <>
       <Drawer
@@ -66,12 +68,17 @@ export default function AddTaskDrawer({
           <DrawerCloseButton />
 
           <DrawerBody as={VStack} spacing={5} mt={10}>
-            <Select ref={firstField} placeholder="Choose type of task">
+            <Select
+              ref={firstField}
+              placeholder="Choose type of task"
+              focusBorderColor="#1287aa"
+              _selected={{ backgroundColor: "#1287aa" }}
+            >
               {types.map((type) => (
                 <option value={type}>{type}</option>
               ))}
             </Select>
-            <Input placeholder="Task title" />
+            <Input placeholder="Task title" focusBorderColor="#1287aa" />
             <Box
               borderStyle="solid"
               border="1px"
@@ -91,7 +98,7 @@ export default function AddTaskDrawer({
                 />
               </HStack>
             </Box>
-            <Textarea placeholder="Describe task" />
+            <Textarea placeholder="Describe task" focusBorderColor="#1287aa" />
           </DrawerBody>
 
           <DrawerFooter>
