@@ -20,7 +20,7 @@ const MonthSelector = ({ currentMonth }: Props) => {
         isDisabled={monthIndex === 0}
         onClick={() => setMonthIndex(monthIndex - 1)}
       />
-      <Text w={20} textAlign="center">
+      <Text w={24} textAlign="center">
         {monthArray[monthIndex]}
       </Text>
       <IconButton
