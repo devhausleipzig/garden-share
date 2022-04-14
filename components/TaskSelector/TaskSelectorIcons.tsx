@@ -1,18 +1,12 @@
 import { Icon } from "@chakra-ui/icons";
 
 type Props = {
-  iconName:
-    | "unchecked"
-    | "checked"
-    | "watering"
-    | "weeding"
-    | "building"
-    | "pruning";
+  iconName: "unselected" | "selected";
   color?: string;
 };
 
 const TaskSelectorIcons = ({ iconName, color = "currentColor" }: Props) => {
-  if (iconName === "unchecked") {
+  if (iconName === "unselected") {
     return (
       <Icon color={color} viewBox="0 0 16 16">
         <path
@@ -21,7 +15,7 @@ const TaskSelectorIcons = ({ iconName, color = "currentColor" }: Props) => {
         ></path>
       </Icon>
     );
-  } else if (iconName === "checked") {
+  } else if (iconName === "selected") {
     return (
       <Icon color={color} viewBox="0 0 16 16">
         <path

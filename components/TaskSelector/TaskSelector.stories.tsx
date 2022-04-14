@@ -12,17 +12,49 @@ const Template: ComponentStory<typeof TaskSelector> = (args) => (
   <TaskSelector {...args} />
 );
 
-export const Checked = Template.bind({});
-Checked.args = {
+export const Taken = Template.bind({});
+Taken.args = {
   title: "Hard Task",
   date: "today",
-  status: "checked",
-  type: "building",
+  tasktype: "building",
+  taken: true,
 };
-export const Unchecked = Template.bind({});
-Unchecked.args = {
+export const Untaken = Template.bind({});
+Untaken.args = {
   title: "Annoying Task",
   date: "Tomorrow",
-  status: "unchecked",
-  type: "watering",
+  tasktype: "watering",
+  taken: false,
+};
+
+export const Watering = Template.bind({});
+Watering.args = {
+  title: "Annoying Task",
+  date: "today",
+  tasktype: "watering",
+  taken: false,
+};
+
+export const Weeding = Template.bind({});
+Weeding.args = {
+  title: "Annoying Task",
+  date: "today",
+  tasktype: "weeding",
+  taken: false,
+};
+
+export const Pruning = Template.bind({});
+Pruning.args = {
+  title: "Annoying Task",
+  date: "today",
+  tasktype: "pruning",
+  taken: false,
+};
+
+export const Building = Template.bind({});
+Building.args = {
+  title: "Annoying Task",
+  date: "today",
+  tasktype: "building",
+  taken: false,
 };

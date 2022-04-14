@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import React from "react";
 import TaskSelectorIcons from "./TaskSelectorIcons";
+import TaskTypeIcons from "./TaskTypeIcons";
 
 type User = {
   name: string;
@@ -27,27 +28,43 @@ type Task = {
   content?: string;
   date?: string;
   user?: User;
-  status: "unchecked" | "checked";
-  type: "watering" | "weeding" | "building" | "pruning";
+  tasktype: "watering" | "weeding" | "pruning" | "building";
+  taken: boolean;
 };
 
 const colors = {
   buttons: "#27BBAD",
   offwhite: "#FFFBFA",
-  text: "#401743",
+  selectedbg: "#FFFBFA",
+  selectedtext: "#401743",
+  unselectedbg: "#F2F1ED",
+  unselectedtext: "#401743",
+  takenbg: "rgba(64, 23, 67, 0.4)",
+  takentext: "#FFFBFA",
 };
 
-const TaskSelector = ({ title, content, date, user, status, type }: Task) => {
-  const [check, setCheck] = React.useState(status === "checked" ? true : false);
-  const handleToggle = () => setCheck(!check);
-
-  const style = {:focus {box-shadow: none !important}};
+const TaskSelector = ({
+  title,
+  content,
+  date,
+  user,
+  taken,
+  tasktype,
+}: Task) => {
+  const [select, setSelect] = React.useState(false);
+  const handleToggle = () => setSelect(!select);
 
   return (
     <>
       <Center>
         <Flex
-          backgroundColor={colors.offwhite}
+          backgroundColor={
+            taken
+              ? colors.takenbg
+              : select
+              ? colors.selectedbg
+              : colors.unselectedbg
+          }
           w="66%"
           px="6"
           py="6"
@@ -55,20 +72,41 @@ const TaskSelector = ({ title, content, date, user, status, type }: Task) => {
           gap="2"
           borderRadius={15}
           boxShadow="md"
-          textColor={colors.text}
+          textColor={
+            taken
+              ? colors.takentext
+              : select
+              ? colors.selectedtext
+              : colors.unselectedtext
+          }
         >
-          <Flex justify="space-between" align="center">
-            <TaskSelectorIcons iconName={type} />
-            {status === "checked" && <Text>{title}</Text>}
-            {status === "unchecked" && <Text as="s">{title}</Text>}
-            <IconButton
-              variant="unstyled"
-              aria-label={"checked-status"}
-              onClick={handleToggle}
-              style={style}
-            >
-              <TaskSelectorIcons iconName={!check ? "unchecked" : "checked"} />
-            </IconButton>
+          <Flex justify="space-between" align="center" minHeight="40px" gap="4">
+            {tasktype === "watering" && <TaskTypeIcons iconName={tasktype} />}
+            {tasktype === "weeding" && <TaskTypeIcons iconName={tasktype} />}
+            {tasktype === "pruning" && <TaskTypeIcons iconName={tasktype} />}
+            {tasktype === "building" && <TaskTypeIcons iconName={tasktype} />}
+            {!taken && <Text userSelect="none">{title}</Text>}
+            {taken && (
+              <Text userSelect="none" as="s">
+                {title}
+              </Text>
+            )}
+            <Spacer></Spacer>
+            {!taken && (
+              <IconButton
+                variant="unstyled"
+                aria-label={"checked-status"}
+                onClick={handleToggle}
+                _focus={{
+                  boxShadow: "none",
+                }}
+              >
+                <TaskSelectorIcons
+                  iconName={!select ? "unselected" : "selected"}
+                />
+              </IconButton>
+            )}
+            {taken && <Text userSelect="none">Already Taken</Text>}
           </Flex>
         </Flex>
       </Center>
