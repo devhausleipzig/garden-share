@@ -1,22 +1,5 @@
-import type { NextPage } from "next";
-import {
-  Stack,
-  HStack,
-  VStack,
-  Box,
-  Collapse,
-  Button,
-  Image,
-  Center,
-  Flex,
-  Text,
-  Spacer,
-  IconButton,
-  Icon,
-} from "@chakra-ui/react";
-import Link from "next/link";
+import { Center, HStack, Text, VStack } from "@chakra-ui/react";
 import React from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import WeatherIcon from "./WeatherIcon";
 
 const colors = {
@@ -37,7 +20,7 @@ const weather = {
   sun: "/sun.svg",
 };
 
-type Day = {
+type DayCardProps = {
   date: number;
   weatherStart:
     | "fog"
@@ -56,20 +39,18 @@ type Day = {
     | "sun"
     | "thunderstorm";
   slots: number;
-  path: string;
-  border: "borderFree" | "borderPartial" | "borderFull";
 };
 
-const DayCard = ({
-  date,
-  weatherStart,
-  weatherEnd,
-  slots,
-  path,
-  border,
-}: Day) => {
-  const [day, setDay] = React.useState();
-
+const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {
+  const borderColor = () => {
+    if (slots === 0) {
+      return colors.borderFull;
+    }
+    if (slots === 12) {
+      return colors.borderFree;
+    }
+    return colors.borderPartial;
+  };
   return (
     <>
       <Center>
@@ -85,7 +66,7 @@ const DayCard = ({
           boxShadow="md"
           alignContent="center"
           border="2px"
-          borderColor={colors[border]}
+          borderColor={borderColor()}
         >
           <HStack justify="space-between" w="full">
             <Text fontSize="xl">{date && date}</Text>
