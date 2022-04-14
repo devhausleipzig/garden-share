@@ -13,7 +13,7 @@ export const useAuth = () => useContext(AuthContext);
 interface AuthContextValue {
   user: User | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => void;
+  login: (email: string, password: string) => User | null;
   logout: () => void;
 }
 
@@ -39,23 +39,28 @@ export const AuthProvider = ({ children }: Props) => {
 
   const login = (email: string, password: string) => {
     if (email === "admin@rooted.de" && password === "password") {
-      setUser({
+      const user: User = {
         id: "123",
         email,
         password,
         name: "Admin",
         role: "Admin",
-      });
+      };
+      setUser(user);
+      return user;
     }
     if (email === "user@rooted.de" && password === "password") {
-      setUser({
+      const user: User = {
         id: "234",
         email,
         password,
         name: "User",
         role: "User",
-      });
+      };
+      setUser(user);
+      return user;
     }
+    return null;
   };
 
   const logout = () => setUser(null);

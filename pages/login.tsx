@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useAuth } from "../context/authContext";
 
 const Login = () => {
@@ -29,14 +29,16 @@ const Login = () => {
 
   const loginHandler = (e: FormEvent) => {
     e.preventDefault();
-    login(email, password);
-    r.push("/");
-    console.log("email:", email);
-    console.log("password:", password);
-
-    // clear input fields
-    setEmail("");
-    setPassword("");
+    const user = login(email, password);
+    if (user) {
+      r.push("/");
+    } else {
+      // clear input fields
+      setEmail("");
+      setPassword("");
+    }
+    // console.log("email:", email);
+    // console.log("password:", password);
   };
 
   return (
@@ -79,6 +81,7 @@ const Login = () => {
                   <Input
                     type="email"
                     required
+                    placeholder="Your Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -87,6 +90,7 @@ const Login = () => {
                   <FormLabel>Password</FormLabel>
                   <Input
                     type="password"
+                    placeholder="Your Password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
