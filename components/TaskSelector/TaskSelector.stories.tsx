@@ -18,3 +18,9 @@ Checked.args = {
   date: "today",
   status: "checked",
 };
+export const Unchecked = Template.bind({});
+Unchecked.args = {
+  title: "Annoying Task",
+  date: "today",
+  status: "unchecked",
+};
