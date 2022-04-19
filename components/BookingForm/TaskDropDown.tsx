@@ -1,8 +1,8 @@
 import { Select } from "@chakra-ui/react";
-import { useState } from "react";
+import { Key, useState } from "react";
 
 type Props = {
-  key: number;
+  key: Key | number;
 };
 
 const TaskDropDown = ({ key }: Props) => {

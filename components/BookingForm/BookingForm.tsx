@@ -1,12 +1,18 @@
 import { AddIcon } from "@chakra-ui/icons";
 import {
+  ChakraStylesConfig,
+  AsyncCreatableSelect,
+  AsyncSelect,
+  CreatableSelect,
+  Select,
+} from "chakra-react-select";
+import {
   Button,
   Checkbox,
   FormControl,
   HStack,
   IconButton,
   Input,
-  Select,
   VStack,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
@@ -26,6 +32,11 @@ type Booking = {
   isShared: boolean;
 };
 
+type SelectedTask = {
+  label: string;
+  value: string;
+};
+
 const Booking = ({
   title,
   date,
@@ -37,11 +48,12 @@ const Booking = ({
   const [startDate, setStartDate] = useState(new Date());
   const [titleState, setTitleState] = useState("");
   const [checkedItems, setCheckedItems] = useState([false, false]);
-  const [selectedTask, setSelectedTask] = useState([]);
-  const addTaskDropDown = (event) => {
-    setSelectedTask(
-      selectedTask.concat(<TaskDropDown key={selectedTask.length} />)
-    );
+  const [selectedTask, setSelectedTask] = useState<SelectedTask[]>([]);
+  const chakraStyles: ChakraStylesConfig = {
+    container: (provided, state) => ({
+      ...provided,
+      w: "100%",
+    }),
   };
 
   return (
@@ -60,13 +72,31 @@ const Booking = ({
           dateFormat="dd/MM/yyyy"
         />
         <HStack width="100%">
-          <TaskDropDown />
-          <IconButton icon={<AddIcon />} aria-label={""} size={"md"} />
+          <Select
+            onChange={(value) => setSelectedTask(value as SelectedTask[])}
+            chakraStyles={chakraStyles}
+            // @ts-ignore
+            isMulti
+            options={[
+              {
+                label: "watering",
+                value: "watering",
+              },
+              {
+                label: "building",
+                value: "building",
+              },
+              {
+                label: "harvesting",
+                value: "harvesting",
+              },
+            ]}
+          />
         </HStack>
         <HStack width="100%" justifyContent="space-between">
-          <Checkbox>Private?</Checkbox>
-          <Checkbox>Overnight?</Checkbox>
-          <Checkbox>Clip to Messageboard?</Checkbox>
+          <Checkbox isChecked={checkedItems[0]}>Private?</Checkbox>
+          <Checkbox isChecked={checkedItems[1]}>Overnight?</Checkbox>
+          <Checkbox isChecked={checkedItems[2]}>Clip to Messageboard?</Checkbox>
           <Button type="submit">submit</Button>
         </HStack>
       </FormControl>
