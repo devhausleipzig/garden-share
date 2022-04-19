@@ -26,6 +26,7 @@ const Timeslot = ({ time, bookedBy, status }: TimeslotProps) => {
       p={4}
       color="white"
       aria-label="Timeslot"
+      fontSize="sm"
     >
       <Text pr={2}>{time}</Text>
       <Text pr={2}>

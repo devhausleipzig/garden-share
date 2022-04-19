@@ -46,10 +46,10 @@ const TaskSelector = ({ title, taken, tasktype }: Task) => {
           ? colors.selectedbg
           : colors.unselectedbg
       }
-      p="6"
+      p={4}
+      w="100%"
       justifyContent="space-between"
-      borderRadius={15}
-      boxShadow="md"
+      borderRadius="0px"
       textColor={
         taken
           ? colors.takentext
@@ -58,7 +58,7 @@ const TaskSelector = ({ title, taken, tasktype }: Task) => {
           : colors.unselectedtext
       }
     >
-      <HStack align="center" minHeight="40px" gap="4">
+      <HStack align="center" fontSize="sm" gap="4">
         {tasktype === "watering" && <TaskTypeIcons iconName={tasktype} />}
         {tasktype === "weeding" && <TaskTypeIcons iconName={tasktype} />}
         {tasktype === "pruning" && <TaskTypeIcons iconName={tasktype} />}
@@ -71,7 +71,11 @@ const TaskSelector = ({ title, taken, tasktype }: Task) => {
         )}
       </HStack>
       {!taken && (select ? <CheckIcon /> : null)}
-      {taken && <Text userSelect="none">Already Taken</Text>}
+      {taken && (
+        <Text fontSize="xs" userSelect="none">
+          Already Taken
+        </Text>
+      )}
     </HStack>
   );
 };

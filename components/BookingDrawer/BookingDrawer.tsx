@@ -91,9 +91,7 @@ function BookingDrawer({
   timeSlots,
   clickHandler,
 }: Props) {
-  //   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
-
+  const firstField = useRef(null);
   return (
     <>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
@@ -102,8 +100,8 @@ function BookingDrawer({
           <DrawerCloseButton />
 
           <DrawerBody as={VStack} spacing={2} mt={10}>
-            {timeSlots.map((slot) => (
-              <Timeslot {...slot} />
+            {timeSlots.map((slot, i) => (
+              <Timeslot {...slot} key={i} />
             ))}
             <Text
               fontSize="xl"
