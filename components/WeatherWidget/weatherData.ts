@@ -54,11 +54,11 @@ app.get("/weather/:lat/:lon", async (req, _res) => {
 
 
 // example:  /city/weimar/ge
-app.get("/city/:city/:countery", async (req, _res) => {
+app.get("/city/:city/:country", async (req, _res) => {
   const city = req.params.city;
-  const countery = req.params.countery;
+  const country = req.params.country;
 
-  const url = `${WEATHER_API}${city},${countery}?key=${WEATHER_KEY}`;
+  const url = `${WEATHER_API}${city},${country}?key=${WEATHER_KEY}`;
   console.log('url: ', url)
 
   await api.get(url)
