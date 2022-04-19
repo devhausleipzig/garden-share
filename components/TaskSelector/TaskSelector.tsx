@@ -58,7 +58,7 @@ const TaskSelector = ({ title, taken, tasktype }: Task) => {
           : colors.unselectedtext
       }
     >
-      <HStack justify="space-between" align="center" minHeight="40px" gap="4">
+      <HStack align="center" minHeight="40px" gap="4">
         {tasktype === "watering" && <TaskTypeIcons iconName={tasktype} />}
         {tasktype === "weeding" && <TaskTypeIcons iconName={tasktype} />}
         {tasktype === "pruning" && <TaskTypeIcons iconName={tasktype} />}
