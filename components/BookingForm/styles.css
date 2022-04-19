@@ -34,9 +34,6 @@
   display: block;
   border-color: #fffbfa;
 }
-.react-datepicker__input-container:first-child {
-  padding-left: 1rem;
-}
 
 .react-datepicker__header {
   border-radius: 0;
@@ -114,4 +111,14 @@
   padding-left: 1rem;
   background-color: #fffbfa;
   cursor: pointer;
+}
+
+.react-datepicker__input-container input {
+  text-indent: 1rem;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+* {
+  box-sizing: border-box;
 }
