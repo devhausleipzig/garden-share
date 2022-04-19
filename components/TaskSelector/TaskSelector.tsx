@@ -28,16 +28,8 @@ const colors = {
   takentext: "#FFFBFA",
 };
 
-const TaskSelector = ({
-  title,
-  content,
-  date,
-  user,
-  taken,
-  tasktype,
-}: Task) => {
+const TaskSelector = ({ title, taken, tasktype }: Task) => {
   const [select, setSelect] = React.useState(false);
-  const handleToggle = () => setSelect(!select);
 
   const handleClick = () => {
     if (!taken) setSelect(!select);
