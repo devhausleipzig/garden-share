@@ -1,5 +1,6 @@
 import { Box, Flex, Image,Spacer, Text } from "@chakra-ui/react";
 
+
 interface WeatherWidgetProps{
     bgImg:string,
     icon:string,
@@ -10,9 +11,7 @@ interface WeatherWidgetProps{
     precipitation: number
 }
 
-
 export default function WeatherWidget({bgImg,icon,temperature, wind, minTemp, maxTemp, precipitation}:WeatherWidgetProps) {
-
 
     return (
         <Box minH={150} minW={200} maxH={200} maxW={300} rounded={'md'} bgSize={'cover'} bgPos={'center'} bgImage={bgImg}>
