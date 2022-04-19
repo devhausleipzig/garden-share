@@ -8,7 +8,7 @@ type User = {
   image: string;
 };
 
-type Task = {
+export type Task = {
   title: string;
   content?: string;
   date?: string;

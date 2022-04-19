@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
@@ -22,13 +22,15 @@ const Timeslot = ({ time, bookedBy, status }: TimeslotProps) => {
       alignItems="center"
       borderRadius="0px"
       bg={status === "free" ? "#27BBAD" : "#F6886F"}
-      w="20%"
-      p={7}
+      w="100%"
+      p={4}
       color="white"
       aria-label="Timeslot"
     >
-      <p>{time}</p>
-      <p>{status === "free" ? "Free Time Slot" : `Booked by ${bookedBy}`}</p>
+      <Text pr={2}>{time}</Text>
+      <Text pr={2}>
+        {status === "free" ? " Free Time Slot" : ` Booked by ${bookedBy}`}
+      </Text>
 
       <CheckIcon boxSize="1.5em" opacity={checked ? 1 : 0} />
     </Button>
