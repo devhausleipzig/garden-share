@@ -6,7 +6,6 @@ interface EmojiProps {
   users?: string[]; // ['id1', 'id2']
   emoji: string;
   count: number;
-  index: number;
   emojiID: string;
   renderAgain: (emojiID: string) => void;
 }
@@ -17,7 +16,6 @@ export default function AddEmoji({
   users,
   emoji,
   count,
-  index,
   emojiID,
 }: EmojiProps) {
   const [counter, setCounter] = useState(count);
