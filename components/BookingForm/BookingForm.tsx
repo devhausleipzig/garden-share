@@ -20,10 +20,9 @@ import { type } from "os";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./styles.css";
 import TaskDropDown from "./TaskDropDown";
 
-type Booking = {
+export type BookingType = {
   title?: string;
   date: Date;
   task: string;
@@ -37,17 +36,17 @@ type SelectedTask = {
   value: string;
 };
 
-const Booking = ({
+const BookingForm = ({
   title,
   date,
   task,
   isPrivate,
   isOvernight,
   isShared,
-}: Booking) => {
+}: BookingType) => {
   const [startDate, setStartDate] = useState(new Date());
   const [titleState, setTitleState] = useState("");
-  const [checkedItems, setCheckedItems] = useState([false, false]);
+  const [checkedItems, setCheckedItems] = useState([]);
   const [selectedTask, setSelectedTask] = useState<SelectedTask[]>([]);
   const chakraStyles: ChakraStylesConfig = {
     container: (provided, state) => ({
@@ -57,8 +56,8 @@ const Booking = ({
   };
 
   return (
-    <VStack width="50%" spacing={3}>
-      <FormControl>
+    <FormControl>
+      <VStack width="50%" spacing={3}>
         <Input
           placeholder="Task title"
           focusBorderColor="#1287aa"
@@ -99,9 +98,9 @@ const Booking = ({
           <Checkbox isChecked={checkedItems[2]}>Clip to Messageboard?</Checkbox>
           <Button type="submit">submit</Button>
         </HStack>
-      </FormControl>
-    </VStack>
+      </VStack>
+    </FormControl>
   );
 };
 
-export default Booking;
+export default BookingForm;
