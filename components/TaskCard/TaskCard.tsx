@@ -7,9 +7,8 @@ export type TaskCardProps = {
   buttonClickHandler: () => void;
   status: Status;
   title: string;
-  description: string;
+  description: string[];
   assigned?: boolean;
-  stars: number;
 };
 
 const TaskCard = ({
@@ -19,8 +18,8 @@ const TaskCard = ({
   title,
   description,
   assigned,
-  stars,
 }: TaskCardProps) => {
+  console.log(status);
   return (
     <HStack
       border={0.5}
@@ -31,7 +30,7 @@ const TaskCard = ({
       alignItems="flex-start"
       minW={72}
       // p={0}
-      height="300px"
+      height="15vh"
     >
       <Image
         src="https://images.unsplash.com/photo-1555955208-94f6fafea771?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Z2FyZGVuaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
@@ -73,9 +72,6 @@ const TaskCard = ({
           <Button bg="#1287aa" color="#fffbfa" onClick={buttonClickHandler}>
             Sign Up for task
           </Button>
-          <Text color="rgba(64,23,67,0.4)">{`+ ${stars} ${
-            stars === 1 ? "Star" : "Stars"
-          }`}</Text>
         </HStack>
       </VStack>
     </HStack>

@@ -8,7 +8,7 @@ type AddTaskButtonProps = {
 const AddTaskButton = ({ clickHandler }: AddTaskButtonProps) => {
   return (
     <Button
-      height="10vh"
+      height="15vh"
       border={0.5}
       borderColor="blackAlpha.300"
       color="blackAlpha.300"
