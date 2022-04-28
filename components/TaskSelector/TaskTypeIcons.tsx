@@ -9,7 +9,7 @@ type Props = {
 const TaskTypeIcons = ({
   iconName,
   color = "currentColor",
-  size = 8,
+  size = 4,
 }: Props) => {
   if (iconName === "watering") {
     return (
