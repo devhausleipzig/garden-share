@@ -1,11 +1,11 @@
 import React, {useState } from "react";
 import Picker from "emoji-picker-react";
 import AddEmoji from "./AddEmoji";
-import { Flex, IconButton } from "@chakra-ui/react";
+import { Box, Flex, IconButton } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { nanoid } from "nanoid";
 
-interface EmojiProps {
+export interface EmojiProps {
   users?: string[]; // ['id1', 'id2']
   emoji: string;
   count: number;
@@ -52,7 +52,7 @@ const EmojiReaction = ({ userId , emojiProps }: EmojiPropsArray) => {
   };
 
   return (
-    <>
+    <Box position={"relative"}>
       <Flex gap={2} userSelect={"none"} cursor={"pointer"} padding={2}>
         {emojis.map((emj, index) => {
           return (
@@ -72,8 +72,8 @@ const EmojiReaction = ({ userId , emojiProps }: EmojiPropsArray) => {
           <IconButton icon={<AddIcon />} aria-label={""} size={"sm"} />
         </span>
       </Flex>
-      {pickerBox && <Picker onEmojiClick={onEmojiClick} />}
-    </>
+      {pickerBox && <Picker onEmojiClick={onEmojiClick} pickerStyle={{ position: 'absolute', zIndex:999 }} />}
+    </Box>
   );
 };
 
