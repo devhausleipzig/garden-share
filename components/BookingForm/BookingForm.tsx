@@ -52,6 +52,8 @@ const BookingForm = ({
     container: (provided, state) => ({
       ...provided,
       w: "100%",
+      borderColor: "rgba(64,23,67,0.4)",
+      _placeholder: "rgba(64,23,67,0.4)",
     }),
   };
 
@@ -59,7 +61,7 @@ const BookingForm = ({
     <FormControl>
       <VStack width="50%" spacing={3}>
         <Input
-          placeholder="Task title"
+          placeholder="Booking title"
           focusBorderColor="#1287aa"
           _placeholder={{ color: "#401743", opacity: 0.4 }}
           borderColor="rgba(64,23,67,0.4)"
@@ -74,6 +76,7 @@ const BookingForm = ({
           <Select
             onChange={(value) => setSelectedTask(value as SelectedTask[])}
             chakraStyles={chakraStyles}
+            color="#401743"
             // @ts-ignore
             isMulti
             options={[
@@ -96,7 +99,9 @@ const BookingForm = ({
           <Checkbox isChecked={checkedItems[0]}>Private?</Checkbox>
           <Checkbox isChecked={checkedItems[1]}>Overnight?</Checkbox>
           <Checkbox isChecked={checkedItems[2]}>Clip to Messageboard?</Checkbox>
-          <Button type="submit">submit</Button>
+          <Button backgroundColor="#26BBAD" type="submit">
+            submit
+          </Button>
         </HStack>
       </VStack>
     </FormControl>
