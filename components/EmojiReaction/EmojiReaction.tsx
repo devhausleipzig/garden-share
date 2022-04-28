@@ -72,7 +72,7 @@ const EmojiReaction = ({ userId , emojiProps }: EmojiPropsArray) => {
           <IconButton icon={<AddIcon />} aria-label={""} size={"sm"} />
         </span>
       </Flex>
-      {pickerBox && <Picker onEmojiClick={onEmojiClick} pickerStyle={{ position: 'absolute', zIndex:999 }} />}
+      {pickerBox && <Picker onEmojiClick={onEmojiClick} pickerStyle={{ position: 'absolute', zIndex: 999 }} />}
     </Box>
   );
 };
