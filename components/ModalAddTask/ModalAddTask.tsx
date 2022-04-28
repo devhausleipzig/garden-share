@@ -18,7 +18,7 @@ export const ModalAddTask = () => {
   return (
     <>
       <Stack>
-        <Heading as="h4" size="lg">
+        <Heading as="h4" size="lg" textAlign={"center"}>
           Create new task
         </Heading>
         <HStack>
