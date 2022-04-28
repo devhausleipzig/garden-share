@@ -13,7 +13,7 @@ argTypes: {},
 const Template: ComponentStory<typeof ModalAddTask> = (args) => (
   <>
   <ModalAddTask />
-  <TaskSteps textValue="lorem ipsom" />
+  
   </>
 );
 

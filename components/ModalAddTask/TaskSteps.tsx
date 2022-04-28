@@ -17,9 +17,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-interface TaskStepsProps {
-  textValue: string;
+
+export interface TaskStepsProps {
+    id?: number
+  textValue: string
 }
+
 export const TaskSteps = ({ textValue }: TaskStepsProps) => {
   const [text, setText] = useState(textValue);
   const {
@@ -28,10 +31,10 @@ export const TaskSteps = ({ textValue }: TaskStepsProps) => {
     onOpen,
   } = useDisclosure({ defaultIsOpen: true });
   return (
-    <>
-      <Alert status="success">
+    <Center>
+      <Alert status="success" rounded='md' w={"90%"}>
         <Flex justifyContent={"space-between"} width={"full"}>
-          <Box>
+          <Box rounded='md'>
             <AlertDescription>{textValue}</AlertDescription>
           </Box>
 
@@ -44,6 +47,6 @@ export const TaskSteps = ({ textValue }: TaskStepsProps) => {
           />
         </Flex>
       </Alert>
-    </>
+    </Center>
   );
 };
