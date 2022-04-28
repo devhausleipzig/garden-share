@@ -86,6 +86,18 @@ const BookingForm = ({
                 value: "building",
               },
               {
+                label: "pruning",
+                value: "pruning",
+              },
+              {
+                label: "seeding",
+                value: "seeding",
+              },
+              {
+                label: "weeding",
+                value: "weeding",
+              },
+              {
                 label: "harvesting",
                 value: "harvesting",
               },
