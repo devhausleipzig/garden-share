@@ -48,9 +48,8 @@ const MessageBoard: NextPage = () => {
       </Box>
       {messages.map((message, index) => {
         return (
-          <Box m={3}>
+          <Box  key={index}   m={3}>
             <MessageCard
-              key={index}
               type={message.type}
               title={message.title}
               content={message.content}
