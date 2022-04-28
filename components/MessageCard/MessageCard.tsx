@@ -23,7 +23,7 @@ type User = {
   image: string;
 };
 
-type Message = {
+export type Message = {
   type: "LargeCard" | "SmallCard";
   title: string;
   content: string;
@@ -91,7 +91,7 @@ const MessageCard = ({ type, title, content, date, user, img }: Message) => {
                 </Text>
               </Flex>
               <Flex alignItems="center" gap="2">
-                <EmojiReaction />
+                {/* <EmojiReaction emojiProps={""} userId={""}/> */}
                 <Spacer></Spacer>
                 {type === "SmallCard" && (
                   <IconButton
