@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { ModalAddTask } from "./ModalAddTask";
-import {TaskSteps} from "./TaskSteps"
 
 export default {
   title: "Component/ModalAddTask",

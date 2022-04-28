@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Center,
   Heading,
@@ -9,17 +8,11 @@ import {
   InputRightElement,
   Select,
   Stack,
-  Text,
 } from "@chakra-ui/react";
-import { TaskSteps, TaskStepsProps } from "./TaskSteps";
+import { TaskStep, TaskStepProps } from "./TaskStep";
+import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
 
-import { useRef, useState } from "react";
-const stepsArr: TaskStepsProps[] = [
-  {
-    id: 1,
-    textValue: "step1",
-  },
-];
 export type TaskType =
   | "NONE"
   | "HARVESTING"
@@ -34,13 +27,26 @@ export const ModalAddTask = () => {
   const [taskType, setTaskType] = useState<TaskType>("NONE");
   const [repeats, setRepeats] = useState<RepeatsType>("NONE");
   const [deadline, setDeadline] = useState<Date | any>();
-  const [steps, setSteps] = useState<TaskStepsProps[]>(stepsArr);
+  const [steps, setSteps] = useState<TaskStepProps[]>([]);
   const [instruction, setInstruction] = useState<string>("");
 
   const addStep = () => {
-    setSteps([...steps, { textValue: instruction }]);
+     if(!steps && instruction) {
+      setSteps([{textValue: instruction, id: nanoid(10)}])
+    }else  if((instruction && steps!.length < 5))  {
+       setSteps([...steps, { textValue: instruction, id: nanoid(10) }]);
+    }
     setInstruction("");
   };
+
+  const closeStepHandler = (id: string) => { 
+    console.log('clicked id:',id);
+    console.log('oldSteps', steps)
+    const newSteps = steps!.filter((s) => s.id != id )
+    console.log('newSteps',newSteps)
+    setSteps(newSteps); 
+  };
+
   return (
     <Center>
       <Stack w={"75%"} textAlign={"center"}>
@@ -104,10 +110,15 @@ export const ModalAddTask = () => {
         </InputGroup>
 
         {steps.map((step, index) => {
-          return (
-            <TaskSteps key={index} id={step.id} textValue={step.textValue} />
-          );
-        })}
+            return (
+              <TaskStep
+                key={index}
+                id={step.id}
+                textValue={step.textValue}
+                closeHandler={closeStepHandler}
+              />
+            );
+          })}
         <Center>
           <Button w={"90%"}> Add Task</Button>
         </Center>
