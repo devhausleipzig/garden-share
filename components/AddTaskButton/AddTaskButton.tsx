@@ -8,7 +8,7 @@ type AddTaskButtonProps = {
 const AddTaskButton = ({ clickHandler }: AddTaskButtonProps) => {
   return (
     <Button
-      height="10vh"
+      height="15vh"
       border={0.5}
       borderColor="blackAlpha.300"
       color="blackAlpha.300"
@@ -16,7 +16,6 @@ const AddTaskButton = ({ clickHandler }: AddTaskButtonProps) => {
       _hover={{ textColor: "blackAlpha.600", borderColor: "blackAlpha.600" }}
       p={16}
       onClick={clickHandler}
-      minW={72}
     >
       <Center>
         <Box display="flex" justifyContent="center" alignItems="center">
