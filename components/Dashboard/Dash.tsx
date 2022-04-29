@@ -13,7 +13,7 @@ const colors = {
 const Dash = () => {
   return (
     <>
-      <HStack w="full" alignItems="top">
+      <HStack w="full" alignItems="top" paddingX="6" paddingTop="4" gap="4">
         <VStack>
           <Text fontSize="lg" w="100%" textAlign="left">
             Todays Weather
