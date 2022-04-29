@@ -12,31 +12,17 @@ interface TasksProps extends Task {
 }
 
 export type Task = {
-  deadline: Date;
-  type: string;
-  steps: string[];
+  identifer: string;
+  deadline: string;
+  type:
+    | "HARVESTING"
+    | "WATERING"
+    | "PRUNING"
+    | "SEEDING"
+    | "BUILDING"
+    | "WEEDING";
+  steps: string;
 };
-
-const mockData = [
-  {
-    type: "WATERING",
-    deadline: "2022-04-29",
-    steps: ["do this", "do that"],
-    repeating: "WEEKLY",
-  },
-  {
-    type: "SEEDING",
-    deadline: "2023-04-25",
-    steps: ["do this", "do that"],
-    repeating: "WEEKLY",
-  },
-  {
-    type: "WATERING",
-    deadline: "2021-04-25",
-    steps: ["do this", "do that"],
-    repeating: "WEEKLY",
-  },
-];
 
 const Tasks = ({
   deadline,
@@ -45,7 +31,7 @@ const Tasks = ({
   clickHandler,
   buttonClickHandler,
 }: TasksProps) => {
-  // const { tasks, today } = useTasks();
+  const { tasks, today } = useTasks();
 
   return (
     <Flex px={16} py={8} wrap="wrap" gap={8}>
@@ -54,9 +40,10 @@ const Tasks = ({
           throw new Error("Function not implemented.");
         }}
       />
-      {mockData.length &&
-        mockData.map((task) => (
+      {!!tasks.length &&
+        tasks.map((task) => (
           <TaskCard
+            key={task.identifer}
             clickHandler={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -73,10 +60,10 @@ const Tasks = ({
             }
             // status="overdue"
             title={task.type}
-            description={task.steps}
+            description={task.steps.split(",")}
           />
         ))}
-      {!mockData.length && (
+      {!tasks.length && (
         <Center>
           <Spinner />
         </Center>
