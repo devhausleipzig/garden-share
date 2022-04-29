@@ -32,7 +32,7 @@ export const Header = () => {
           </Link>
         </LinkWrapper>
         <LinkWrapper>
-          <Link href="/message-board">
+          <Link href="/messageBoard">
             <a>Message Board</a>
           </Link>
         </LinkWrapper>
