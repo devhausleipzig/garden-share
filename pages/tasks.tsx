@@ -6,6 +6,7 @@ import AddTaskButton from "../components/AddTaskButton/AddTaskButton";
 import TaskCard from "../components/TaskCard/TaskCard";
 import { useTasks } from "../hooks/useTasks";
 
+
 interface TasksProps extends Task {
   clickHandler: () => void;
   buttonClickHandler: () => void;
