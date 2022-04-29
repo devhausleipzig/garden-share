@@ -30,21 +30,47 @@ export const ModalAddTask = () => {
   const [steps, setSteps] = useState<TaskStepProps[]>([]);
   const [instruction, setInstruction] = useState<string>("");
 
+  const sendTaskData = () => {
+    if(taskType === 'NONE') return;
+    if(taskType === undefined) return;
+    if(!steps) return;
+    const data={
+      taskType:taskType,
+      repeats:repeats,
+      deadline:deadline,
+      steps:steps
+    }
+    fetch('http://localhost:8000/task"', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const addStep = () => {
-     if(!steps && instruction) {
-      setSteps([{textValue: instruction, id: nanoid(10)}])
-    }else  if((instruction && steps!.length < 5))  {
-       setSteps([...steps, { textValue: instruction, id: nanoid(10) }]);
+    if (!steps && instruction) {
+      setSteps([{ textValue: instruction, id: nanoid(10) }]);
+    } else if (instruction && steps!.length < 5) {
+      setSteps([...steps, { textValue: instruction, id: nanoid(10) }]);
     }
     setInstruction("");
   };
 
-  const closeStepHandler = (id: string) => { 
-    console.log('clicked id:',id);
-    console.log('oldSteps', steps)
-    const newSteps = steps!.filter((s) => s.id != id )
-    console.log('newSteps',newSteps)
-    setSteps(newSteps); 
+  const closeStepHandler = (id: string) => {
+    console.log("clicked id:", id);
+    console.log("oldSteps", steps);
+    const newSteps = steps.filter((s) => s.id != id);
+    console.log("newSteps", newSteps);
+    setSteps(newSteps);
   };
 
   return (
@@ -110,17 +136,17 @@ export const ModalAddTask = () => {
         </InputGroup>
 
         {steps.map((step, index) => {
-            return (
-              <TaskStep
-                key={index}
-                id={step.id}
-                textValue={step.textValue}
-                closeHandler={closeStepHandler}
-              />
-            );
-          })}
+          return (
+            <TaskStep
+              key={index}
+              id={step.id}
+              textValue={step.textValue}
+              closeHandler={closeStepHandler}
+            />
+          );
+        })}
         <Center>
-          <Button w={"90%"}> Add Task</Button>
+          <Button w={"90%"} onClick={sendTaskData} > Add Task</Button>
         </Center>
       </Stack>
     </Center>
