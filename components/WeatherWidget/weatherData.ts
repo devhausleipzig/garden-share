@@ -1,5 +1,3 @@
-import express from "express";
-import cors from "cors";
 import api from './weatherAPI'
 import dotenv from 'dotenv'
 
@@ -7,13 +5,6 @@ dotenv.config({ path: '../../.env' })
 const WEATHER_API = process.env.WEATHER_API || 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
 const WEATHER_KEY = process.env.WEATHER_KEY || 'MS48M24PRXNCA6CYBA855WX8E';
 
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-app.get("/", (_req, res) => {
-  res.send("weather server is running");
-});
 
 let results: any;
 const resultsObj = {
@@ -30,6 +21,7 @@ const resultsObj = {
 //   "latitude": 50.977,
 // "longitude": 11.3279,
 // example: /weather/50.977/11.3279
+/*
 app.get("/weather/:lat/:lon", async (req, _res) => {
   const lat = req.params.lat;
   const lon = req.params.lon;
@@ -77,8 +69,5 @@ app.get("/city/:city/:country", async (req, _res) => {
  console.log('resultsObj[Server]: ', resultsObj);
 });
 
-const PORT = process.env.PORT || 3001;
+*/
 
-app.listen(PORT, () => {
-  console.log(`node server is running on port: ${PORT}`);
-});
