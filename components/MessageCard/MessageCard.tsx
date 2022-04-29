@@ -14,22 +14,25 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import EmojiReaction from "../EmojiReaction/EmojiReaction";
+import { useAuth } from "../../context/authContext";
+import { EmojiProps } from "../EmojiReaction/EmojiReaction";
 
 type User = {
   name: string;
   image: string;
 };
 
-type Message = {
+export type Message = {
   type: "LargeCard" | "SmallCard";
   title: string;
   content: string;
   date: string;
   user: User;
   img?: string;
+  emojiProps: EmojiProps[];
 };
 
 const colors = {
@@ -38,9 +41,20 @@ const colors = {
   text: "#401743",
 };
 
-const MessageCard = ({ type, title, content, date, user, img }: Message) => {
+const MessageCard = ({
+  type,
+  title,
+  content,
+  date,
+  img,
+  emojiProps,
+}: Message) => {
   const [show, setShow] = React.useState(type === "LargeCard" ? true : false);
+  const [emojis, setEmojis] = useState<EmojiProps[]>(emojiProps);
   const handleToggle = () => setShow(!show);
+  //TODO: comeback to fix user.id, line 115
+  const { user } = useAuth();
+
   return (
     <>
       <Center>
@@ -91,7 +105,8 @@ const MessageCard = ({ type, title, content, date, user, img }: Message) => {
                 </Text>
               </Flex>
               <Flex alignItems="center" gap="2">
-                <EmojiReaction userId={""} emojiProps={[]} />
+                {!user && <EmojiReaction emojiProps={emojis} userId={"1"} />}
+
                 <Spacer></Spacer>
                 {type === "SmallCard" && (
                   <IconButton

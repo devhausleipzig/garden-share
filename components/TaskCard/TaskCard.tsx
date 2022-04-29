@@ -3,23 +3,21 @@ import { Box, VStack, Image, HStack, Text, Button } from "@chakra-ui/react";
 export type Status = "overdue" | "due soon" | "not urgent";
 
 export type TaskCardProps = {
-  clickHandler: () => void;
-  buttonClickHandler: () => void;
+  viewClickHandler: () => void;
+  signUpClickHandler: () => void;
   status: Status;
   title: string;
-  description: string;
+  description: string[];
   assigned?: boolean;
-  stars: number;
 };
 
 const TaskCard = ({
-  clickHandler,
-  buttonClickHandler,
+  viewClickHandler,
+  signUpClickHandler,
   status,
   title,
   description,
   assigned,
-  stars,
 }: TaskCardProps) => {
   return (
     <HStack
@@ -27,11 +25,9 @@ const TaskCard = ({
       borderColor="blackAlpha.600"
       borderStyle="solid"
       color="blackAlpha.600"
-      onClick={clickHandler}
       alignItems="flex-start"
-      minW={72}
-      // p={0}
-      height="300px"
+      height="15vh"
+      borderRadius={4}
     >
       <Image
         src="https://images.unsplash.com/photo-1555955208-94f6fafea771?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Z2FyZGVuaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
@@ -39,15 +35,17 @@ const TaskCard = ({
         width="40%"
         height="100%"
         objectFit="cover"
+        borderLeftRadius={4}
       />
       <VStack
         alignItems="flex-start"
         justifyContent="space-between"
         p={3}
         height="100%"
+        w="60%"
       >
-        <Box>
-          <Text fontWeight="bold" fontSize="2xl" color="#401743">
+        <Box w="100%">
+          <Text fontWeight="bold" color="#401743" fontSize="large">
             {title}
           </Text>
           <Box
@@ -59,23 +57,21 @@ const TaskCard = ({
                 ? "#fcb602"
                 : "#27bbad"
             }
-            rounded="lg"
+            borderRadius={4}
             px={2}
           >
             <Text color="#fffbfa">{status}</Text>
           </Box>
-          <Text color="#401743" noOfLines={4}>
-            {description}
-          </Text>
         </Box>
 
-        <HStack>
-          <Button bg="#1287aa" color="#fffbfa" onClick={buttonClickHandler}>
-            Sign Up for task
+        <HStack w="100%">
+          {" "}
+          <Button bg="#1287aa" color="#fffbfa" onClick={viewClickHandler}>
+            Details
           </Button>
-          <Text color="rgba(64,23,67,0.4)">{`+ ${stars} ${
-            stars === 1 ? "Star" : "Stars"
-          }`}</Text>
+          <Button bg="#1287aa" color="#fffbfa" onClick={signUpClickHandler}>
+            Sign Up
+          </Button>
         </HStack>
       </VStack>
     </HStack>
