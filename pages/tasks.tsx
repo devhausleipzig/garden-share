@@ -7,23 +7,21 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import type { NextPage } from "next";
-import { title } from "process";
-import { useEffect, useState } from "react";
+import { on } from "events";
 import AddTaskButton from "../components/AddTaskButton/AddTaskButton";
 import { ModalAddTask } from "../components/ModalAddTask/ModalAddTask";
-import ModalTaskDetails from "../components/ModalTaskDetails/ModalTaskDetails";
 import TaskCard from "../components/TaskCard/TaskCard";
 import { useTasks } from "../hooks/useTasks";
 
 const Tasks = () => {
   const { tasks, today } = useTasks();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Center>
       <SimpleGrid columns={{ lg: 3, xl: 4 }} spacing={8} marginTop={8}>
-        <AddTaskButton clickHandler={() => {}} />
-
+        <AddTaskButton clickHandler={onOpen} />
+        {isOpen ? <ModalAddTask isOpen={isOpen} onClose={onClose} /> : null}
         {!!tasks.length &&
           tasks.map((task) => (
             <>

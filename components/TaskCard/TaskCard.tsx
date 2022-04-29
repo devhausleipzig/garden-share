@@ -7,6 +7,7 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
+
 import ModalTaskDetails from "../ModalTaskDetails/ModalTaskDetails";
 
 export type Status = "overdue" | "due soon" | "not urgent";
@@ -19,6 +20,7 @@ export type TaskCardProps = {
 
 const TaskCard = ({ status, steps, type }: TaskCardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <HStack
       border={0.5}
