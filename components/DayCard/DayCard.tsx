@@ -20,7 +20,7 @@ const weather = {
   sun: "/sun.svg",
 };
 
-type DayCardProps = {
+export type DayCardProps = {
   date: number;
   weatherStart:
     | "fog"
@@ -38,15 +38,15 @@ type DayCardProps = {
     | "sunSnow"
     | "sun"
     | "thunderstorm";
-  slots: number;
+  slots: string;
 };
 
 const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {
   const borderColor = () => {
-    if (slots === 0) {
+    if (slots === "full") {
       return colors.borderFull;
     }
-    if (slots === 12) {
+    if (slots === "free") {
       return colors.borderFree;
     }
     return colors.borderPartial;
@@ -75,17 +75,17 @@ const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {
               <WeatherIcon iconName={weatherEnd} color={colors.buttons} />
             </HStack>
           </HStack>
-          {slots === 0 && (
+          {slots === "full" && (
             <Text textAlign="center">
               Fully<br></br>Booked
             </Text>
           )}
-          {slots === 12 && (
+          {slots === "free" && (
             <Text textAlign="center">
               All<br></br>Free
             </Text>
           )}
-          {slots > 0 && slots < 12 && (
+          {slots === "partial" && (
             <Text textAlign="center">{`${slots} Slots Remaining`}</Text>
           )}
         </VStack>
