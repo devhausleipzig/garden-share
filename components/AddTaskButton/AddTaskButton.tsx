@@ -16,7 +16,6 @@ const AddTaskButton = ({ clickHandler }: AddTaskButtonProps) => {
       _hover={{ textColor: "blackAlpha.600", borderColor: "blackAlpha.600" }}
       p={16}
       onClick={clickHandler}
-      minW={72}
     >
       <Center>
         <Box display="flex" justifyContent="center" alignItems="center">
