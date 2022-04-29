@@ -1,24 +1,24 @@
-import { Box, VStack, Image, HStack, Text, Button } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  Image,
+  HStack,
+  Text,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
+import ModalTaskDetails from "../ModalTaskDetails/ModalTaskDetails";
 
 export type Status = "overdue" | "due soon" | "not urgent";
 
 export type TaskCardProps = {
-  viewClickHandler: () => void;
-  signUpClickHandler: () => void;
   status: Status;
-  title: string;
-  description: string[];
-  assigned?: boolean;
+  steps: string;
+  type: string;
 };
 
-const TaskCard = ({
-  viewClickHandler,
-  signUpClickHandler,
-  status,
-  title,
-  description,
-  assigned,
-}: TaskCardProps) => {
+const TaskCard = ({ status, steps, type }: TaskCardProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <HStack
       border={0.5}
@@ -46,7 +46,7 @@ const TaskCard = ({
       >
         <Box w="100%">
           <Text fontWeight="bold" color="#401743" fontSize="large">
-            {title}
+            {type}
           </Text>
           <Box
             display="inline-block"
@@ -66,12 +66,20 @@ const TaskCard = ({
 
         <HStack w="100%">
           {" "}
-          <Button bg="#1287aa" color="#fffbfa" onClick={viewClickHandler}>
+          <Button bg="#1287aa" color="#fffbfa" onClick={onOpen}>
             Details
           </Button>
-          <Button bg="#1287aa" color="#fffbfa" onClick={signUpClickHandler}>
+          <Button bg="#1287aa" color="#fffbfa" onClick={() => {}}>
             Sign Up
           </Button>
+          {isOpen ? (
+            <ModalTaskDetails
+              steps={steps}
+              type={type}
+              isOpen={isOpen}
+              onClose={onClose}
+            />
+          ) : null}
         </HStack>
       </VStack>
     </HStack>

@@ -23,6 +23,10 @@ export type TaskType =
   | "WEEDING";
 export type RepeatsType = "NONE" | "DAILY" | "WEEKLY" | "MONTHLY";
 
+export type AddTaskModalProps = {
+  close: () => void;
+};
+
 export const ModalAddTask = () => {
   const [taskType, setTaskType] = useState<TaskType>("NONE");
   const [repeats, setRepeats] = useState<RepeatsType>("NONE");
@@ -31,15 +35,15 @@ export const ModalAddTask = () => {
   const [instruction, setInstruction] = useState<string>("");
 
   const sendTaskData = () => {
-    if(taskType === 'NONE') return;
-    if(taskType === undefined) return;
-    if(!steps) return;
-    const data={
-      taskType:taskType,
-      repeats:repeats,
-      deadline:deadline,
-      steps:steps
-    }
+    if (taskType === "NONE") return;
+    if (taskType === undefined) return;
+    if (!steps) return;
+    const data = {
+      taskType: taskType,
+      repeats: repeats,
+      deadline: deadline,
+      steps: steps,
+    };
     fetch('http://localhost:8000/task"', {
       method: "POST",
       headers: {
@@ -66,10 +70,7 @@ export const ModalAddTask = () => {
   };
 
   const closeStepHandler = (id: string) => {
-    console.log("clicked id:", id);
-    console.log("oldSteps", steps);
     const newSteps = steps.filter((s) => s.id != id);
-    console.log("newSteps", newSteps);
     setSteps(newSteps);
   };
 
@@ -146,7 +147,10 @@ export const ModalAddTask = () => {
           );
         })}
         <Center>
-          <Button w={"90%"} onClick={sendTaskData} > Add Task</Button>
+          <Button w={"90%"} onClick={sendTaskData}>
+            {" "}
+            Add Task
+          </Button>
         </Center>
       </Stack>
     </Center>
