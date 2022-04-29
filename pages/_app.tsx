@@ -1,16 +1,21 @@
-import "../styles/globals.css";
+import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { ChakraProvider, Icon } from "@chakra-ui/react";
+import "react-datepicker/dist/react-datepicker.css";
+// import "../components/AddTaskDrawer/styles.css";
+import "../components/BookingForm/styles.css";
+
+import customTheme from "../utils/theme";
+import "../styles/globals.css";
 import { AuthProvider } from "../context/authContext";
-import { Header } from "../components/Header/Header";
+import { Header } from "../components/header/Header";
 import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <AuthProvider>
-        <ChakraProvider>
+        <ChakraProvider theme={customTheme}>
           {router.pathname === "/login" ||
           router.pathname === "/signup" ? null : (
             <Header />
