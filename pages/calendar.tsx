@@ -1,9 +1,10 @@
-import { Grid, VStack } from "@chakra-ui/react";
+import { Grid, GridItem, SimpleGrid, VStack } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import DayCard, { DayCardProps } from "../components/DayCard/DayCard";
-import MonthSelector from "../components/MonthSelector/MonthSelector";
+import { MonthSelector } from "../components/MonthSelector/MonthSelector";
 import { useMonth } from "../hooks/useMonth";
+import { currentMonth } from "../utils/date";
 
 // Define Props
 
@@ -22,12 +23,14 @@ interface CalendarProps extends DayCardProps {
 //
 
 const Calendar: NextPage = () => {
-  const { availability, currentMonth } = useMonth();
+  const [monthIndex, setMonthIndex] = useState(currentMonth);
+  const { availability } = useMonth(monthIndex);
+
   return (
     <div>
       <VStack>
-        <MonthSelector currentMonth={currentMonth} />
-        <Grid templateColumns="repeat 7, 1fr" gap={5}>
+        <MonthSelector monthIndex={monthIndex} setMonthIndex={setMonthIndex} />
+        <SimpleGrid columns={7} spacing={5}>
           {!!availability.length &&
             availability.map((day, index) => (
               <DayCard
@@ -38,7 +41,7 @@ const Calendar: NextPage = () => {
                 slots={day}
               />
             ))}
-        </Grid>
+        </SimpleGrid>
       </VStack>
     </div>
   );

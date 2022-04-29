@@ -1,14 +1,15 @@
 import { HStack, IconButton, Text } from "@chakra-ui/react";
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { monthArray } from "../../utils/date";
 
 interface Props {
-  currentMonth: number;
+  // currentMonth: number;
+  monthIndex: number;
+  setMonthIndex: Dispatch<SetStateAction<number>>;
 }
 
-const MonthSelector = ({ currentMonth }: Props) => {
-  const [monthIndex, setMonthIndex] = useState(currentMonth);
+export const MonthSelector = ({ monthIndex, setMonthIndex }: Props) => {
   return (
     <HStack spacing={2}>
       <IconButton
@@ -21,7 +22,7 @@ const MonthSelector = ({ currentMonth }: Props) => {
         onClick={() => setMonthIndex(monthIndex - 1)}
       />
       <Text w={24} textAlign="center">
-        {monthArray[monthIndex]}
+        {monthArray[monthIndex - 1]}
       </Text>
       <IconButton
         color="#FFFBFA"
@@ -35,4 +36,3 @@ const MonthSelector = ({ currentMonth }: Props) => {
     </HStack>
   );
 };
-export default MonthSelector;

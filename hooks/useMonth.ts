@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { DayCardProps } from "../components/DayCard/DayCard";
+import { currentMonth } from "../utils/date";
 
-export const useMonth = () => {
+export const useMonth = (monthIndex: number) => {
   const [availabilityArray, setAvailabilityArray] = useState<string[]>([]);
   async function fetchAvailability(currentMonth: number) {
     try {
@@ -9,14 +10,14 @@ export const useMonth = () => {
         `http://localhost:8000/availability?month=${currentMonth}`
       );
       const result = await response.json();
+      console.log(result);
       setAvailabilityArray(result);
     } catch (err) {
       console.log(err);
     }
   }
-  const currentMonth = new Date().getMonth() + 1;
   useEffect(() => {
-    fetchAvailability(currentMonth);
-  }, []);
-  return { availability: availabilityArray, currentMonth };
+    fetchAvailability(monthIndex);
+  }, [monthIndex]);
+  return { availability: availabilityArray };
 };

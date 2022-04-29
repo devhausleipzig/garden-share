@@ -53,43 +53,41 @@ const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {
   };
   return (
     <>
-      <Center>
-        <VStack
-          backgroundColor={colors.offwhite}
-          w="150px"
-          h="150px"
-          px="6"
-          py="6"
-          flexDirection="column"
-          gap="2"
-          borderRadius={15}
-          boxShadow="md"
-          alignContent="center"
-          border="2px"
-          borderColor={borderColor()}
-        >
-          <HStack justify="space-between" w="full">
-            <Text fontSize="xl">{date && date}</Text>
-            <HStack>
-              <WeatherIcon iconName={weatherStart} color={colors.buttons} />
-              <WeatherIcon iconName={weatherEnd} color={colors.buttons} />
-            </HStack>
+      <VStack
+        backgroundColor={colors.offwhite}
+        w="150px"
+        h="150px"
+        px="6"
+        py="6"
+        flexDirection="column"
+        gap="2"
+        borderRadius={15}
+        boxShadow="md"
+        alignContent="center"
+        border="2px"
+        borderColor={borderColor()}
+      >
+        <HStack justify="space-between" w="full">
+          <Text fontSize="xl">{date && date}</Text>
+          <HStack>
+            <WeatherIcon iconName={weatherStart} color={colors.buttons} />
+            <WeatherIcon iconName={weatherEnd} color={colors.buttons} />
           </HStack>
-          {slots === "full" && (
-            <Text textAlign="center">
-              Fully<br></br>Booked
-            </Text>
-          )}
-          {slots === "free" && (
-            <Text textAlign="center">
-              All<br></br>Free
-            </Text>
-          )}
-          {slots === "partial" && (
-            <Text textAlign="center">{`${slots} Slots Remaining`}</Text>
-          )}
-        </VStack>
-      </Center>
+        </HStack>
+        {slots === "full" && (
+          <Text textAlign="center">
+            Fully<br></br>Booked
+          </Text>
+        )}
+        {slots === "free" && (
+          <Text textAlign="center">
+            All<br></br>Free
+          </Text>
+        )}
+        {slots === "partial" && (
+          <Text textAlign="center">{`Some Slots Remaining`}</Text>
+        )}
+      </VStack>
     </>
   );
 };
