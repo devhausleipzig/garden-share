@@ -60,7 +60,7 @@ const MessageCard = ({
       <Center>
         <Flex
           backgroundColor={colors.offwhite}
-          w="66%"
+          w="100%"
           px="6"
           py="6"
           flexDirection="column"

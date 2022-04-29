@@ -4,7 +4,6 @@ import BookingForm, {
   BookingType,
 } from "../components/BookingForm/BookingForm";
 
-
 const Booking = ({
   title,
   date,

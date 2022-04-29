@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Picker from "emoji-picker-react";
 import AddEmoji from "./AddEmoji";
 import { Box, Flex, IconButton } from "@chakra-ui/react";
@@ -17,8 +17,7 @@ interface EmojiPropsArray {
   emojiProps: EmojiProps[];
 }
 
-const EmojiReaction = ({ userId , emojiProps }: EmojiPropsArray) => {
-
+const EmojiReaction = ({ userId, emojiProps }: EmojiPropsArray) => {
   const [emojis, setEmojis] = useState<EmojiProps[]>(emojiProps);
   const [pickerBox, setPickerBox] = useState(false);
 
@@ -29,11 +28,10 @@ const EmojiReaction = ({ userId , emojiProps }: EmojiPropsArray) => {
     console.log("after", newEmojis);
     setEmojis(newEmojis);
   }
-  
 
   const togglePicker = () => {
     console.log("togglePicker:clicked");
-    setPickerBox((prev)=> !prev);
+    setPickerBox((prev) => !prev);
   };
 
   const onEmojiClick = (_event: any, emojiObject: any) => {
@@ -72,7 +70,12 @@ const EmojiReaction = ({ userId , emojiProps }: EmojiPropsArray) => {
           <IconButton icon={<AddIcon />} aria-label={""} size={"sm"} />
         </span>
       </Flex>
-      {pickerBox && <Picker onEmojiClick={onEmojiClick} pickerStyle={{ position: 'absolute', zIndex: '999' }} />}
+      {pickerBox && (
+        <Picker
+          onEmojiClick={onEmojiClick}
+          pickerStyle={{ position: "absolute", zIndex: "999" }}
+        />
+      )}
     </Box>
   );
 };
