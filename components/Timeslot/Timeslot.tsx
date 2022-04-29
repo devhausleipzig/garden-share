@@ -8,9 +8,10 @@ export type TimeslotProps = {
   time: string;
   status: Status;
   bookedBy?: string;
+  date?: string;
 };
 
-const Timeslot = ({ time, bookedBy, status }: TimeslotProps) => {
+const Timeslot = ({ time, bookedBy, status, date }: TimeslotProps) => {
   const [checked, setChecked] = useState<Boolean>(false);
 
   return (
@@ -28,12 +29,15 @@ const Timeslot = ({ time, bookedBy, status }: TimeslotProps) => {
       aria-label="Timeslot"
       fontSize="sm"
     >
+      {date && <Text pr={2}>{date}</Text>}
       <Text pr={2}>{time}</Text>
       <Text pr={2}>
-        {status === "free" ? " Free Time Slot" : ` Booked by ${bookedBy}`}
+        {status === "free"
+          ? " Free Time Slot"
+          : `${date ? "" : "Booked by"} ${bookedBy}`}
       </Text>
 
-      <CheckIcon boxSize="1.5em" opacity={checked ? 1 : 0} />
+      {!date && <CheckIcon boxSize="1.5em" opacity={checked ? 1 : 0} />}
     </Button>
   );
 };
