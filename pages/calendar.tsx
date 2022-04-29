@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import MockHeader from "../components/MockHeader/MockHeader";
+
 import WeatherWidget from "../components/WeatherWidget/WeatherWidget";
 
 const weatherValuesTEST = {
@@ -11,6 +11,7 @@ const weatherValuesTEST = {
   maxTemp: 100,
   precipitation: 90
 }
+
 
 const Calendar: NextPage = () => {
   return <div>test
