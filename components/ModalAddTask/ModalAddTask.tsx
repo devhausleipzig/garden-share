@@ -32,15 +32,20 @@ export const ModalAddTask = () => {
 
   const sendTaskData = () => {
     if(taskType === 'NONE') return;
-    if(taskType === undefined) return;
+    if(deadline === undefined) return;
     if(!steps) return;
+    // console.log('steps:',steps)
+    const stepsValue= steps.map((s)=> {
+      return { textValue: s.textValue}
+    } )
+    console.log('stepsValue:',stepsValue)
     const data={
-      taskType:taskType,
-      repeats:repeats,
+      type:taskType,
+      repeating:repeats,
       deadline:deadline,
-      steps:steps
+      steps:stepsValue
     }
-    fetch('http://localhost:8000/task"', {
+    fetch('http://localhost:8000/task', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
