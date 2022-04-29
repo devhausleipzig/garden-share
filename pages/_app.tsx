@@ -7,7 +7,7 @@ import "../components/BookingForm/styles.css";
 import customTheme from "../utils/theme";
 import "../styles/globals.css";
 import { AuthProvider } from "../context/authContext";
-import { Header } from "../components/header/Header";
+import { Header } from "../components/Header/Header";
 import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {

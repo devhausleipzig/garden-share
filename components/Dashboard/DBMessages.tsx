@@ -21,6 +21,7 @@ const DBDueTasks = () => {
           name: "Dan Abramov",
           image: "https://bit.ly/dan-abramov",
         }}
+        emojiProps={[]}
       />
     </>
   );

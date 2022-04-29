@@ -10,7 +10,7 @@ const colors = {
   text: "#401743",
 };
 
-const Dashboard = () => {
+const Dash = () => {
   return (
     <>
       <HStack w="full" alignItems="top">
@@ -39,4 +39,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Dash;

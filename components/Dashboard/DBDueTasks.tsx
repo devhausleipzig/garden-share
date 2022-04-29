@@ -11,16 +11,15 @@ const DBDueTasks = () => {
   return (
     <>
       <TaskCard
-        clickHandler={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        buttonClickHandler={function (): void {
-          throw new Error("Function not implemented.");
-        }}
         status={"overdue"}
         title={""}
-        description={""}
-        stars={0}
+        description={[]}
+        viewClickHandler={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        signUpClickHandler={function (): void {
+          throw new Error("Function not implemented.");
+        }}
       />
     </>
   );
