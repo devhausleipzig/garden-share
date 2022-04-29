@@ -91,7 +91,7 @@ const MessageCard = ({ type, title, content, date, user, img }: Message) => {
                 </Text>
               </Flex>
               <Flex alignItems="center" gap="2">
-                <EmojiReaction />
+                {/* <EmojiReaction {...args} /> */}
                 <Spacer></Spacer>
                 {type === "SmallCard" && (
                   <IconButton
