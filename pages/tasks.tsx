@@ -1,14 +1,7 @@
-import {
-  Box,
-  Center,
-  Flex,
-  SimpleGrid,
-  Spinner,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Center, SimpleGrid, Spinner, useDisclosure } from "@chakra-ui/react";
 import { on } from "events";
 import AddTaskButton from "../components/AddTaskButton/AddTaskButton";
+import AddTaskDrawer from "../components/AddTaskDrawer/AddTaskDrawer";
 import { ModalAddTask } from "../components/ModalAddTask/ModalAddTask";
 import TaskCard from "../components/TaskCard/TaskCard";
 import { useTasks } from "../hooks/useTasks";
@@ -21,7 +14,7 @@ const Tasks = () => {
     <Center>
       <SimpleGrid columns={{ lg: 3, xl: 4 }} spacing={8} marginTop={8}>
         <AddTaskButton clickHandler={onOpen} />
-        {isOpen ? <ModalAddTask isOpen={isOpen} onClose={onClose} /> : null}
+        {isOpen ? <AddTaskDrawer isOpen={isOpen} onClose={onClose} /> : null}
         {!!tasks.length &&
           tasks.map((task) => (
             <>
@@ -37,6 +30,7 @@ const Tasks = () => {
                 }
                 type={task.type}
                 steps={task.steps}
+                identifier={task.identifier}
               />
             </>
           ))}

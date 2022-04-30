@@ -6,7 +6,9 @@ import {
   Text,
   Button,
   useDisclosure,
+  Link,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 import ModalTaskDetails from "../ModalTaskDetails/ModalTaskDetails";
 
@@ -16,9 +18,10 @@ export type TaskCardProps = {
   status: Status;
   steps: string;
   type: string;
+  identifier: string;
 };
 
-const TaskCard = ({ status, steps, type }: TaskCardProps) => {
+const TaskCard = ({ status, steps, type, identifier }: TaskCardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -71,15 +74,24 @@ const TaskCard = ({ status, steps, type }: TaskCardProps) => {
           <Button bg="#1287aa" color="#fffbfa" onClick={onOpen}>
             Details
           </Button>
-          <Button bg="#1287aa" color="#fffbfa" onClick={() => {}}>
-            Sign Up
-          </Button>
+          <NextLink href="/calendar" passHref>
+            <Link>
+              <Button
+                bg="#1287aa"
+                color="#fffbfa"
+                onClick={() => sessionStorage.setItem("id", `${identifier}`)}
+              >
+                Sign Up
+              </Button>
+            </Link>
+          </NextLink>
           {isOpen ? (
             <ModalTaskDetails
               steps={steps}
               type={type}
               isOpen={isOpen}
               onClose={onClose}
+              identifier={identifier}
             />
           ) : null}
         </HStack>

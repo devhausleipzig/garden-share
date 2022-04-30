@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Task } from "../pages/tasks";
+import type { Task } from "../pages/tasks";
 
 export const useTasks = () => {
   const [tasksArray, setTasksArray] = useState<Task[]>([]);
 
   async function getOpenTasks() {
     try {
-      const response = await fetch("http://localhost:8000/tasks");
+      const response = await fetch("http://localhost:8000/task");
       const result = await response.json();
       setTasksArray(result);
     } catch (err) {
