@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "outDir": "out",
+      "module": "CommonJS",
+      "noEmit": false
+    },
+    "include": ["components/weatherWidget/*.ts"],
+    "exclude": ["src/app"]
+  }
+  
