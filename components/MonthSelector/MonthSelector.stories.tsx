@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import MonthSelector from "./MonthSelector";
+import { MonthSelector } from "./MonthSelector";
 import { currentMonth } from "../../utils/date";
 
 export default {
@@ -15,5 +15,6 @@ const Template: ComponentStory<typeof MonthSelector> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  currentMonth,
+  monthIndex,
+  setMonthIndex,
 };

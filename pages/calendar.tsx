@@ -1,7 +1,15 @@
-import { Grid, GridItem, SimpleGrid, VStack } from "@chakra-ui/react";
+import {
+  Grid,
+  GridItem,
+  SimpleGrid,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import BookingDrawer from "../components/BookingDrawer/BookingDrawer";
+import BookingDrawer, {
+  BookingDrawerProps,
+} from "../components/BookingDrawer/BookingDrawer";
 import DayCard, { DayCardProps } from "../components/DayCard/DayCard";
 import { MonthSelector } from "../components/MonthSelector/MonthSelector";
 import { useDay } from "../hooks/useDay";
@@ -10,10 +18,13 @@ import { currentMonth } from "../utils/date";
 
 // Define Props
 
-interface CalendarProps extends DayCardProps {
+// interface CalendarProps extends DayCardProps {
+//   clickHandler: () => void;
+// }
+
+interface CalendarProps extends BookingDrawerProps {
   clickHandler: () => void;
 }
-
 // Create Post request in bookingdrawer
 
 // write hook to get month availability
@@ -27,8 +38,15 @@ interface CalendarProps extends DayCardProps {
 const Calendar: NextPage = () => {
   const [monthIndex, setMonthIndex] = useState(currentMonth);
   const { availability } = useMonth(monthIndex);
-  const { bookings, tasks } = useDay(date);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(new Date().getDate());
+  const { bookings, tasks } = useDay(selectedDay);
+  const { onClose } = useDisclosure();
 
+  function clickHandler(date: number) {
+    setSelectedDay(date);
+    setIsOpen(true);
+  }
   return (
     <div>
       <VStack marginTop={4}>
@@ -42,16 +60,19 @@ const Calendar: NextPage = () => {
                 weatherStart={"fog"}
                 weatherEnd={"fog"}
                 slots={day}
+                onClick={clickHandler}
               />
             ))}
         </SimpleGrid>
         <BookingDrawer
-          isOpen={false}
-          onClose={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-          tasks={[]}
-          timeSlots={[]}
+          isOpen={isOpen}
+          onClose={onClose}
+          tasks={tasks}
+          timeSlots={bookings.map((booking) => ({
+            bookedBy: booking.userId,
+            status: "free",
+            time: `${booking.start} - ${booking.end}`,
+          }))}
           clickHandler={function (): void {
             throw new Error("Function not implemented.");
           }}

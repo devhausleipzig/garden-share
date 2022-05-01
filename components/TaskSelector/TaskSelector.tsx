@@ -1,6 +1,7 @@
 import { CheckIcon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
 import React from "react";
+import { Task } from "../../utils/types";
 import TaskTypeIcons from "./TaskTypeIcons";
 
 type User = {
@@ -8,14 +9,14 @@ type User = {
   image: string;
 };
 
-export type Task = {
-  title: string;
-  content?: string;
-  date?: string;
-  user?: User;
-  tasktype: "watering" | "weeding" | "pruning" | "building";
-  taken: boolean;
-};
+// export type Task = {
+//   title: string;
+//   content?: string;
+//   date?: string;
+//   user?: User;
+//   tasktype: "watering" | "weeding" | "pruning" | "building";
+//   taken: boolean;
+// };
 
 const colors = {
   buttons: "#27BBAD",
@@ -28,8 +29,9 @@ const colors = {
   takentext: "#FFFBFA",
 };
 
-const TaskSelector = ({ title, taken, tasktype }: Task) => {
+const TaskSelector = ({ type, bookingId }: Task) => {
   const [select, setSelect] = React.useState(false);
+  const taken = !!bookingId;
 
   const handleClick = () => {
     if (!taken) setSelect(!select);
@@ -59,14 +61,14 @@ const TaskSelector = ({ title, taken, tasktype }: Task) => {
       }
     >
       <HStack align="center" fontSize="sm" gap="4">
-        {tasktype === "watering" && <TaskTypeIcons iconName={tasktype} />}
-        {tasktype === "weeding" && <TaskTypeIcons iconName={tasktype} />}
-        {tasktype === "pruning" && <TaskTypeIcons iconName={tasktype} />}
-        {tasktype === "building" && <TaskTypeIcons iconName={tasktype} />}
-        {!taken && <Text userSelect="none">{title}</Text>}
+        {type === "WATERING" && <TaskTypeIcons iconName={type} />}
+        {type === "WEEDING" && <TaskTypeIcons iconName={type} />}
+        {type === "PRUNING" && <TaskTypeIcons iconName={type} />}
+        {type === "BUILDING" && <TaskTypeIcons iconName={type} />}
+        {!taken && <Text userSelect="none">{type}</Text>}
         {taken && (
           <Text userSelect="none" as="s">
-            {title}
+            {type}
           </Text>
         )}
       </HStack>

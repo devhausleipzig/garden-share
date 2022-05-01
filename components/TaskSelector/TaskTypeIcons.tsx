@@ -1,7 +1,8 @@
 import { Icon, ResponsiveValue } from "@chakra-ui/react";
+import { TaskType } from "../../utils/types";
 
 type Props = {
-  iconName: "watering" | "weeding" | "pruning" | "building";
+  iconName: TaskType;
   color?: string;
   size?: ResponsiveValue<number>;
 };
@@ -11,7 +12,7 @@ const TaskTypeIcons = ({
   color = "currentColor",
   size = 4,
 }: Props) => {
-  if (iconName === "watering") {
+  if (iconName === "WATERING") {
     return (
       <Icon color={color} viewBox="0 0 20 20" boxSize={size}>
         <path
@@ -21,7 +22,7 @@ const TaskTypeIcons = ({
       </Icon>
     );
   }
-  if (iconName === "weeding") {
+  if (iconName === "WEEDING") {
     return (
       <Icon color={color} viewBox="0 0 22 22" boxSize={size}>
         <path
@@ -31,7 +32,7 @@ const TaskTypeIcons = ({
       </Icon>
     );
   }
-  if (iconName === "pruning") {
+  if (iconName === "PRUNING") {
     return (
       <Icon color={color} viewBox="0 0 22 22" boxSize={size}>
         <path
@@ -41,7 +42,7 @@ const TaskTypeIcons = ({
       </Icon>
     );
   }
-  if (iconName === "building") {
+  if (iconName === "BUILDING") {
     return (
       <Icon color={color} viewBox="0 0 16 16" boxSize={size}>
         <path
