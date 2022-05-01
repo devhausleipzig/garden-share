@@ -1,5 +1,6 @@
 import { Center, HStack, Text, VStack } from "@chakra-ui/react";
 import React from "react";
+import { BookingDrawerProps } from "../BookingDrawer/BookingDrawer";
 import WeatherIcon from "./WeatherIcon";
 
 const colors = {
@@ -39,6 +40,7 @@ export type DayCardProps = {
     | "sun"
     | "thunderstorm";
   slots: string;
+  onClick: (date: number) => void;
 };
 
 const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {

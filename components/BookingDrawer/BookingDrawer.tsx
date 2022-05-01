@@ -15,10 +15,11 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import Tasks from "../../pages/tasks";
-import TaskSelector, { Task } from "../TaskSelector/TaskSelector";
+import { Task } from "../../utils/types";
+import TaskSelector from "../TaskSelector/TaskSelector";
 import Timeslot, { TimeslotProps } from "../Timeslot/Timeslot";
 
-type Props = {
+export type BookingDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
   tasks: Task[];
@@ -90,7 +91,7 @@ function BookingDrawer({
   tasks,
   timeSlots,
   clickHandler,
-}: Props) {
+}: BookingDrawerProps) {
   const firstField = useRef(null);
   return (
     <>
