@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { Booking, Task } from "../utils/types";
+import { format, setDate } from "date-fns";
 
-export const useDay = (date: number) => {
+export const useDay = (dayofMonth: number) => {
+  const date = setDate(new Date(), dayofMonth);
   const [bookingArray, setBookingArray] = useState<Booking[]>([]);
   const [taskArray, setTaskArray] = useState<Task[]>([]);
 
-  async function getBookings(date: number) {
+  async function getBookings(date: Date) {
     try {
       const response = await fetch(
-        `http://localhost:8000/bookings?date=${new Date(date).toISOString()}`
+        `http://localhost:8000/bookings?date=${format(date, "yyyy-MM-dd")}`
       );
       const result = await response.json();
+      console.log(result);
       setBookingArray(result);
     } catch (err) {
       console.log(err);
@@ -23,7 +26,7 @@ export const useDay = (date: number) => {
         `http://localhost:8000/tasks?available=true`
       );
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       setTaskArray(result);
     } catch (err) {
       console.log(err);
