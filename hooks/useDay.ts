@@ -26,7 +26,7 @@ export const useDay = (dayofMonth: number) => {
         `http://localhost:8000/tasks?available=true`
       );
       const result = await response.json();
-      // console.log(result);
+      console.log(result);
       setTaskArray(result);
     } catch (err) {
       console.log(err);

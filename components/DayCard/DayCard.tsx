@@ -40,10 +40,16 @@ export type DayCardProps = {
     | "sun"
     | "thunderstorm";
   slots: string;
-  onClick: (date: number) => void;
+  clickHandler: (date: number) => void;
 };
 
-const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {
+const DayCard = ({
+  date,
+  weatherStart,
+  weatherEnd,
+  slots,
+  clickHandler,
+}: DayCardProps) => {
   const borderColor = () => {
     if (slots === "full") {
       return colors.borderFull;
@@ -56,6 +62,7 @@ const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {
   return (
     <>
       <VStack
+        onClick={clickHandler}
         backgroundColor={colors.offwhite}
         w="150px"
         h="150px"

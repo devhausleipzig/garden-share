@@ -46,6 +46,7 @@ const Calendar: NextPage = () => {
   function clickHandler(date: number) {
     setSelectedDay(date);
     setIsOpen(true);
+    console.log("clicked");
   }
   return (
     <div>
@@ -67,7 +68,9 @@ const Calendar: NextPage = () => {
         <BookingDrawer
           isOpen={isOpen}
           onClose={onClose}
-          tasks={tasks}
+          tasks={tasks.map((task) => ({
+            type: task.type,
+          }))}
           timeSlots={bookings.map((booking) => ({
             bookedBy: booking.userId,
             status: "free",
