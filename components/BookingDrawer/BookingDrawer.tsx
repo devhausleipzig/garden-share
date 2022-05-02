@@ -13,7 +13,7 @@ import {
   VStack,
   Text,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { SetStateAction, useRef, useState } from "react";
 import Tasks from "../../pages/tasks";
 import { Task } from "../../utils/types";
 import TaskSelector from "../TaskSelector/TaskSelector";
@@ -27,7 +27,7 @@ export type BookingDrawerProps = {
   clickHandler: () => void;
 };
 
-const timeSlots: TimeslotProps[] = [
+const freeSlots: TimeslotProps[] = [
   {
     time: "08:00 - 09:00",
     status: "free",
@@ -93,6 +93,20 @@ function BookingDrawer({
   clickHandler,
 }: BookingDrawerProps) {
   const firstField = useRef(null);
+  const [slots, setSlots] = useState<TimeslotProps[]>(freeSlots);
+  const insertSlots = () => {
+    const newSlots: SetStateAction<TimeslotProps[]> = [];
+    slots.forEach((slot) => {
+      const foundSlot = timeSlots.find(
+        (timeslot) => timeslot.time === slot.time
+      );
+      if (foundSlot) {
+        return newSlots.push(foundSlot);
+      }
+      return newSlots.push(slot);
+    });
+    setSlots(newSlots);
+  };
   return (
     <>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>

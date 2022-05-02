@@ -61,7 +61,7 @@ const Calendar: NextPage = () => {
                 weatherStart={"fog"}
                 weatherEnd={"fog"}
                 slots={day}
-                onClick={clickHandler}
+                clickHandler={clickHandler}
               />
             ))}
         </SimpleGrid>
