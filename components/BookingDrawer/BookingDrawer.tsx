@@ -24,7 +24,7 @@ export type BookingDrawerProps = {
   onClose: () => void;
   tasks: Task[];
   timeSlots: TimeslotProps[];
-  clickHandler: () => void;
+  clickHandler: (date: number, tasks: Task[]) => void;
 };
 
 const timeSlots: TimeslotProps[] = [

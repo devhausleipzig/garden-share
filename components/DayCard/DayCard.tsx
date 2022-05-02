@@ -43,7 +43,13 @@ export type DayCardProps = {
   onClick: (date: number) => void;
 };
 
-const DayCard = ({ date, weatherStart, weatherEnd, slots }: DayCardProps) => {
+const DayCard = ({
+  date,
+  weatherStart,
+  weatherEnd,
+  slots,
+  onClick,
+}: DayCardProps) => {
   const borderColor = () => {
     if (slots === "full") {
       return colors.borderFull;
