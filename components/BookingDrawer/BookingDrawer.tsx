@@ -13,7 +13,7 @@ import {
   VStack,
   Text,
 } from "@chakra-ui/react";
-import { SetStateAction, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import Tasks from "../../pages/tasks";
 import { Task } from "../../utils/types";
 import TaskSelector from "../TaskSelector/TaskSelector";
@@ -69,6 +69,11 @@ const freeSlots: TimeslotProps[] = [
     bookedBy: "",
   },
   {
+    time: "16:00 - 17:00",
+    status: "free",
+    bookedBy: "",
+  },
+  {
     time: "17:00 - 18:00",
     status: "free",
     bookedBy: "",
@@ -95,7 +100,7 @@ function BookingDrawer({
   const firstField = useRef(null);
   const [slots, setSlots] = useState<TimeslotProps[]>(freeSlots);
   const insertSlots = () => {
-    const newSlots: SetStateAction<TimeslotProps[]> = [];
+    const newSlots: TimeslotProps[] = [];
     slots.forEach((slot) => {
       const foundSlot = timeSlots.find(
         (timeslot) => timeslot.time === slot.time
@@ -107,6 +112,11 @@ function BookingDrawer({
     });
     setSlots(newSlots);
   };
+  useEffect(() => {
+    console.log(timeSlots);
+    insertSlots();
+  }, [timeSlots]);
+
   return (
     <>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
@@ -115,7 +125,7 @@ function BookingDrawer({
           <DrawerCloseButton />
 
           <DrawerBody as={VStack} spacing={2} mt={10}>
-            {timeSlots.map((slot, i) => (
+            {slots.map((slot, i) => (
               <Timeslot {...slot} key={i} />
             ))}
             <Text
