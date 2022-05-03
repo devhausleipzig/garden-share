@@ -40,7 +40,7 @@ export type DayCardProps = {
     | "sun"
     | "thunderstorm";
   slots: string;
-  onClick: (date: number) => void;
+  clickHandler: (date: number) => void;
 };
 
 const DayCard = ({
@@ -48,7 +48,7 @@ const DayCard = ({
   weatherStart,
   weatherEnd,
   slots,
-  onClick,
+  clickHandler,
 }: DayCardProps) => {
   const borderColor = () => {
     if (slots === "full") {
@@ -60,43 +60,42 @@ const DayCard = ({
     return colors.borderPartial;
   };
   return (
-    <>
-      <VStack
-        backgroundColor={colors.offwhite}
-        w="150px"
-        h="150px"
-        px="6"
-        py="6"
-        flexDirection="column"
-        gap="2"
-        borderRadius={15}
-        boxShadow="md"
-        alignContent="center"
-        border="2px"
-        borderColor={borderColor()}
-      >
-        <HStack justify="space-between" w="full">
-          <Text fontSize="xl">{date && date}</Text>
-          <HStack>
-            <WeatherIcon iconName={weatherStart} color={colors.buttons} />
-            <WeatherIcon iconName={weatherEnd} color={colors.buttons} />
-          </HStack>
+    <VStack
+      onClick={() => clickHandler(date)}
+      backgroundColor={colors.offwhite}
+      w="150px"
+      h="150px"
+      px="6"
+      py="6"
+      flexDirection="column"
+      gap="2"
+      borderRadius={15}
+      boxShadow="md"
+      alignContent="center"
+      border="2px"
+      borderColor={borderColor()}
+    >
+      <HStack justify="space-between" w="full">
+        <Text fontSize="xl">{date && date}</Text>
+        <HStack>
+          <WeatherIcon iconName={weatherStart} color={colors.buttons} />
+          <WeatherIcon iconName={weatherEnd} color={colors.buttons} />
         </HStack>
-        {slots === "full" && (
-          <Text textAlign="center">
-            Fully<br></br>Booked
-          </Text>
-        )}
-        {slots === "free" && (
-          <Text textAlign="center">
-            All<br></br>Free
-          </Text>
-        )}
-        {slots === "partial" && (
-          <Text textAlign="center">{`Some Slots Remaining`}</Text>
-        )}
-      </VStack>
-    </>
+      </HStack>
+      {slots === "full" && (
+        <Text textAlign="center">
+          Fully<br></br>Booked
+        </Text>
+      )}
+      {slots === "free" && (
+        <Text textAlign="center">
+          All<br></br>Free
+        </Text>
+      )}
+      {slots === "partial" && (
+        <Text textAlign="center">{`Some Slots Remaining`}</Text>
+      )}
+    </VStack>
   );
 };
 

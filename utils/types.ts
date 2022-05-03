@@ -13,14 +13,14 @@ export type Booking = {
 };
 
 export type Task = {
-  identifier: string;
-  bookingId: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+  identifier?: string;
+  bookingId?: string | null;
+  createdAt?: Date;
+  updatedAt?: Date;
   type: TaskType;
-  deadline: Date;
-  steps: string;
-  repeating: Repeats;
+  deadline?: Date;
+  steps?: string;
+  repeating?: Repeats;
 };
 
 export type TaskType =

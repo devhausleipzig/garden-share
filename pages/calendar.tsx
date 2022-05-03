@@ -60,14 +60,14 @@ const Calendar: NextPage = () => {
                 weatherStart={"fog"}
                 weatherEnd={"fog"}
                 slots={day}
-                onClick={clickHandler}
+                clickHandler={clickHandler}
               />
             ))}
         </SimpleGrid>
         <BookingDrawer
           isOpen={isOpen}
           onClose={onClose}
-          tasks={tasks}
+          tasks={tasks.map(task)}
           timeSlots={bookings.map((booking) => ({
             bookedBy: booking.userId,
             status: "free",
