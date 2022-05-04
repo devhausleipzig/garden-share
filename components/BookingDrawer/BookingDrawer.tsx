@@ -97,23 +97,23 @@ function BookingDrawer({
   timeSlots,
   clickHandler,
 }: BookingDrawerProps) {
-  const firstField = useRef(null);
   const [slots, setSlots] = useState<TimeslotProps[]>(freeSlots);
   const insertSlots = () => {
-    const newSlots: TimeslotProps[] = [];
-    slots.forEach((slot) => {
-      const foundSlot = timeSlots.find(
-        (timeslot) => timeslot.time === slot.time
-      );
-      if (foundSlot) {
-        return newSlots.push(foundSlot);
-      }
-      return newSlots.push(slot);
+    setSlots(() => {
+      if (!timeSlots.length) return freeSlots;
+
+      return freeSlots.map((slot) => {
+        const foundSlot = timeSlots.find(
+          (timeslot) => timeslot.time === slot.time
+        );
+        if (foundSlot) {
+          return foundSlot;
+        }
+        return slot;
+      });
     });
-    setSlots(newSlots);
   };
   useEffect(() => {
-    console.log(timeSlots);
     insertSlots();
   }, [timeSlots]);
 
@@ -126,7 +126,7 @@ function BookingDrawer({
 
           <DrawerBody as={VStack} spacing={2} mt={10}>
             {slots.map((slot, i) => (
-              <Timeslot {...slot} key={i} />
+              <Timeslot {...slot} key={slot.time} />
             ))}
             <Text
               fontSize="xl"

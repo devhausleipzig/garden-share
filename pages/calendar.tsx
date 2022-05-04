@@ -38,7 +38,6 @@ interface CalendarProps extends BookingDrawerProps {
 const Calendar: NextPage = () => {
   const [monthIndex, setMonthIndex] = useState(currentMonth);
   const { availability } = useMonth(monthIndex);
-  // const [isOpen, setIsOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const { bookings, tasks } = useDay(selectedDay, monthIndex);
   const { onClose, isOpen, onOpen } = useDisclosure();
@@ -46,7 +45,6 @@ const Calendar: NextPage = () => {
   function clickHandler(date: number) {
     setSelectedDay(date);
     onOpen();
-    console.log("clicked");
   }
   return (
     <div>

@@ -8,7 +8,7 @@ export const useMonth = (monthIndex: number) => {
         `http://localhost:8000/availability?month=${monthIndex}`
       );
       const result = await response.json();
-      console.log(result);
+
       setAvailabilityArray(result);
     } catch (err) {
       console.log(err);

@@ -25,7 +25,6 @@ export const useDay = (dayofMonth: number, monthIndex: number) => {
         `http://localhost:8000/tasks?available=true`
       );
       const result = await response.json();
-      console.log(result);
       setTaskArray(result);
     } catch (err) {
       console.log(err);
@@ -36,5 +35,6 @@ export const useDay = (dayofMonth: number, monthIndex: number) => {
     getBookings(date);
     getTasks();
   }, [dayofMonth, monthIndex]);
+
   return { bookings: bookingArray, tasks: taskArray };
 };
