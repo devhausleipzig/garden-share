@@ -15,13 +15,13 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import type { NextPage } from "next";
-import { type } from "os";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TaskDropDown from "./TaskDropDown";
-import { TimeslotProps } from "../../utils/types";
+import { Task, TimeslotProps } from "../../utils/types";
+import { setDate } from "date-fns";
+import { useTask } from "../../hooks/useTask";
 
 export type BookingType = {
   timeslot: TimeslotProps;
@@ -34,6 +34,7 @@ type SelectedTask = {
 };
 
 const BookingForm = ({ timeslot, taskId }: BookingType) => {
+  const tasks = useTask();
   const [startDate, setStartDate] = useState(new Date());
   const [titleState, setTitleState] = useState("");
   const [checkedItems, setCheckedItems] = useState([]);
@@ -46,6 +47,23 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
       _placeholder: "rgba(64,23,67,0.4)",
     }),
   };
+  let pickedTask: SelectedTask[] = [
+    {
+      label: "",
+      value: "",
+    },
+  ];
+  // const date: Date = setDate(new Date(timeslot.time));
+  // console.log(date);
+  function chosenTask(travelTask: string) {
+    tasks.map((task) => {
+      if (task.identifier === travelTask) {
+        (pickedTask.label = task.type), (pickedTask.value = task.type);
+        setSelectedTask(pickedTask as SelectedTask[]);
+      }
+    });
+  }
+  chosenTask(taskId);
 
   return (
     <FormControl>
@@ -63,6 +81,7 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
           dateFormat="dd/MM/yyyy"
         />
         <HStack width="100%">
+          //do we need a new get route for task/:id??
           <Select
             onChange={(value) => setSelectedTask(value as SelectedTask[])}
             chakraStyles={chakraStyles}
@@ -70,6 +89,7 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
             // @ts-ignore
             isMulti
             options={[
+              // map with task.ids?
               {
                 label: "watering",
                 value: "watering",
