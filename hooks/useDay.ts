@@ -21,10 +21,9 @@ export const useDay = (dayofMonth: number, monthIndex: number) => {
 
   async function getTasks() {
     try {
-      const response = await fetch(
-        `http://localhost:8000/tasks?available=true`
-      );
+      const response = await fetch(`http://localhost:8000/task?available=true`);
       const result = await response.json();
+      console.log(result);
       setTaskArray(result);
     } catch (err) {
       console.log(err);

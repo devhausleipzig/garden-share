@@ -13,6 +13,7 @@ import {
   VStack,
   Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import Tasks from "../../pages/tasks";
 import { Task } from "../../utils/types";
@@ -20,6 +21,7 @@ import TaskSelector from "../TaskSelector/TaskSelector";
 import Timeslot, { TimeslotProps } from "../Timeslot/Timeslot";
 
 export type BookingDrawerProps = {
+  selectedDate: string;
   isOpen: boolean;
   onClose: () => void;
   tasks: Task[];
@@ -91,13 +93,31 @@ const freeSlots: TimeslotProps[] = [
 ];
 
 function BookingDrawer({
+  selectedDate,
   isOpen,
   onClose,
   tasks,
   timeSlots,
-  clickHandler,
 }: BookingDrawerProps) {
+  const router = useRouter();
   const [slots, setSlots] = useState<TimeslotProps[]>(freeSlots);
+  const [selectedSlot, setSelectedSlot] = useState<TimeslotProps | null>(null);
+  const [selectedTask, setSelectedTask] = useState<string | null>(null);
+
+  // array von ausgewählten timeslots, löschbar
+  // same 4 tasks
+  // durch states
+
+  const clickHandler = () => {
+    router.push({
+      pathname: "/booking",
+      query: {
+        date: selectedDate,
+        task: selectedTask,
+        slot: JSON.stringify(selectedSlot),
+      },
+    });
+  };
   const insertSlots = () => {
     setSlots(() => {
       if (!timeSlots.length) return freeSlots;
@@ -123,10 +143,13 @@ function BookingDrawer({
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-
           <DrawerBody as={VStack} spacing={2} mt={10}>
-            {slots.map((slot, i) => (
-              <Timeslot {...slot} key={slot.time} />
+            {slots.map((slot) => (
+              <Timeslot
+                slot={slot}
+                selectedSlot={selectedSlot}
+                setSelectedSlot={setSelectedSlot}
+              />
             ))}
             <Text
               fontSize="xl"
@@ -138,7 +161,11 @@ function BookingDrawer({
               Tasks
             </Text>
             {tasks.map((task) => (
-              <TaskSelector {...task} />
+              <TaskSelector
+                task={task}
+                selectedTask={selectedTask}
+                setSelectedTask={setSelectedTask}
+              />
             ))}
           </DrawerBody>
 
@@ -150,6 +177,7 @@ function BookingDrawer({
               onClick={clickHandler}
               bg="#1287aa"
               color="#fffbfa"
+              disabled={!selectedTask || !selectedSlot}
             >
               BOOK
             </Button>

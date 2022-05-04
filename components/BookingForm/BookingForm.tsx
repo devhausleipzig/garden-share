@@ -21,14 +21,11 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TaskDropDown from "./TaskDropDown";
+import { TimeslotProps } from "../../utils/types";
 
 export type BookingType = {
-  title?: string;
-  date: Date;
-  task: string;
-  isPrivate: boolean;
-  isOvernight: boolean;
-  isShared: boolean;
+  timeslot: TimeslotProps;
+  taskId: string;
 };
 
 type SelectedTask = {
@@ -36,14 +33,7 @@ type SelectedTask = {
   value: string;
 };
 
-const BookingForm = ({
-  title,
-  date,
-  task,
-  isPrivate,
-  isOvernight,
-  isShared,
-}: BookingType) => {
+const BookingForm = ({ timeslot, taskId }: BookingType) => {
   const [startDate, setStartDate] = useState(new Date());
   const [titleState, setTitleState] = useState("");
   const [checkedItems, setCheckedItems] = useState([]);

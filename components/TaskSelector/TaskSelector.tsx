@@ -1,22 +1,14 @@
 import { CheckIcon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Task } from "../../utils/types";
 import TaskTypeIcons from "./TaskTypeIcons";
 
-type User = {
-  name: string;
-  image: string;
-};
-
-// export type Task = {
-//   title: string;
-//   content?: string;
-//   date?: string;
-//   user?: User;
-//   tasktype: "watering" | "weeding" | "pruning" | "building";
-//   taken: boolean;
-// };
+interface Props {
+  task: Task;
+  selectedTask: string | null;
+  setSelectedTask: Dispatch<SetStateAction<string | null>>;
+}
 
 const colors = {
   buttons: "#27BBAD",
@@ -29,12 +21,12 @@ const colors = {
   takentext: "#FFFBFA",
 };
 
-const TaskSelector = ({ type, bookingId }: Task) => {
-  const [select, setSelect] = React.useState(false);
-  const taken = !!bookingId;
-
+const TaskSelector = ({ task, selectedTask, setSelectedTask }: Props) => {
+  const taken = !!task.bookingId;
+  const isSelected = task.identifier === selectedTask;
   const handleClick = () => {
-    if (!taken) setSelect(!select);
+    if (isSelected) return setSelectedTask(null);
+    if (!taken) setSelectedTask(task.identifier!);
   };
 
   return (
@@ -44,7 +36,7 @@ const TaskSelector = ({ type, bookingId }: Task) => {
       backgroundColor={
         taken
           ? colors.takenbg
-          : select
+          : isSelected
           ? colors.selectedbg
           : colors.unselectedbg
       }
@@ -55,24 +47,24 @@ const TaskSelector = ({ type, bookingId }: Task) => {
       textColor={
         taken
           ? colors.takentext
-          : select
+          : isSelected
           ? colors.selectedtext
           : colors.unselectedtext
       }
     >
       <HStack align="center" fontSize="sm" gap="4">
-        {type === "WATERING" && <TaskTypeIcons iconName={type} />}
-        {type === "WEEDING" && <TaskTypeIcons iconName={type} />}
-        {type === "PRUNING" && <TaskTypeIcons iconName={type} />}
-        {type === "BUILDING" && <TaskTypeIcons iconName={type} />}
-        {!taken && <Text userSelect="none">{type}</Text>}
+        {task.type === "WATERING" && <TaskTypeIcons iconName={task.type} />}
+        {task.type === "WEEDING" && <TaskTypeIcons iconName={task.type} />}
+        {task.type === "PRUNING" && <TaskTypeIcons iconName={task.type} />}
+        {task.type === "BUILDING" && <TaskTypeIcons iconName={task.type} />}
+        {!taken && <Text userSelect="none">{task.type}</Text>}
         {taken && (
           <Text userSelect="none" as="s">
-            {type}
+            {task.type}
           </Text>
         )}
       </HStack>
-      {!taken && (select ? <CheckIcon /> : null)}
+      {!taken && (isSelected ? <CheckIcon /> : null)}
       {taken && (
         <Text fontSize="xs" userSelect="none">
           Already Taken

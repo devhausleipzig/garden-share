@@ -32,3 +32,11 @@ export type TaskType =
   | "WEEDING";
 
 export type Repeats = "NONE" | "DAILY" | "WEEKLY" | "MONTHLY";
+
+export type Status = "free" | "booked";
+
+export type TimeslotProps = {
+  time: string;
+  status: Status;
+  bookedBy?: string;
+};

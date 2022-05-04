@@ -5,7 +5,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { format } from "date-fns";
+import { format, getYear } from "date-fns";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import BookingDrawer, {
@@ -64,9 +64,13 @@ const Calendar: NextPage = () => {
             ))}
         </SimpleGrid>
         <BookingDrawer
+          selectedDate={format(
+            new Date(getYear(new Date()), monthIndex, selectedDay),
+            "yyyy-MM-dd"
+          )}
           isOpen={isOpen}
           onClose={onClose}
-          tasks={tasks.map(task)}
+          tasks={tasks}
           timeSlots={bookings.map((booking) => ({
             bookedBy: booking.userId,
             status: "booked",
