@@ -5,6 +5,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { format } from "date-fns";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import BookingDrawer, {
@@ -14,7 +15,7 @@ import DayCard, { DayCardProps } from "../components/DayCard/DayCard";
 import { MonthSelector } from "../components/MonthSelector/MonthSelector";
 import { useDay } from "../hooks/useDay";
 import { useMonth } from "../hooks/useMonth";
-import { currentMonth } from "../utils/date";
+import { currentMonth, getTime } from "../utils/date";
 
 // Define Props
 
@@ -34,18 +35,18 @@ interface CalendarProps extends BookingDrawerProps {
 // create clickhandler that opens bookingdrawer and maps bookings for the day
 
 //
-
 const Calendar: NextPage = () => {
   const [monthIndex, setMonthIndex] = useState(currentMonth);
   const { availability } = useMonth(monthIndex);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
-  const { bookings, tasks } = useDay(selectedDay);
-  const { onClose } = useDisclosure();
+  const { bookings, tasks } = useDay(selectedDay, monthIndex);
+  const { onClose, isOpen, onOpen } = useDisclosure();
 
   function clickHandler(date: number) {
     setSelectedDay(date);
-    setIsOpen(true);
+    onOpen();
+    console.log("clicked");
   }
   return (
     <div>
@@ -70,8 +71,8 @@ const Calendar: NextPage = () => {
           tasks={tasks.map(task)}
           timeSlots={bookings.map((booking) => ({
             bookedBy: booking.userId,
-            status: "free",
-            time: `${booking.start} - ${booking.end}`,
+            status: "booked",
+            time: `${getTime(booking.start)} - ${getTime(booking.end)}`,
           }))}
           clickHandler={function (): void {
             throw new Error("Function not implemented.");

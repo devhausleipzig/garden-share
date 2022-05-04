@@ -2,8 +2,8 @@ export type Booking = {
   identifier: string;
   createdAt: Date;
   updatedAt: Date;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   private: boolean;
   overnight: boolean;
   published: boolean;

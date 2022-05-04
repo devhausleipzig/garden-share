@@ -1,3 +1,6 @@
+import { format } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
+
 export const monthArray = [
   "January",
   "February",
@@ -13,4 +16,10 @@ export const monthArray = [
   "December",
 ];
 
+const timezone = "Europe/Berlin";
+export const getTime = (date: string) => {
+  const zonedDate = utcToZonedTime(new Date(date), timezone);
+  console.log(zonedDate);
+  return format(zonedDate, "HH:mm");
+};
 export const currentMonth = new Date().getMonth() + 1;
