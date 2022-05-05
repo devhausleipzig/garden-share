@@ -24,6 +24,7 @@ import { setDate, setHours, setMinutes } from "date-fns";
 import { useTask } from "../../hooks/useTask";
 import router, { useRouter } from "next/router";
 import { getDateForForm } from "../../utils/date";
+import { useBooking } from "../../hooks/useBooking";
 
 export type BookingType = {
   timeslot: TimeslotProps;
@@ -54,22 +55,44 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
       _placeholder: "rgba(64,23,67,0.4)",
     }),
   };
-  const router = useRouter();
 
+  // TASK ACTION //
+  const router = useRouter();
   const queryParams = router.query;
   const slot = JSON.parse(queryParams.slot as string);
 
   useEffect(() => {
     setSelectedTask({
-      label: tasks.find((task) => task.identifier === taskId)?.type!,
+      label: chosenTask?.type!,
       value: taskId,
     });
   }, [tasks]);
+  let chosenTask: Task = tasks.find((task) => task.type === selectedTask.value);
 
+  // DATE ACTION //
   useEffect(
     () => setStartDate(getDateForForm(queryParams.date as string, slot.time)),
     []
   );
+
+  // BOOKING ACTION //
+  let almostEnd = slot.time;
+  let [start, end] = almostEnd.split(" - ");
+  let end4real = new Date(Number(end.split(":")[0]));
+
+  const clickHandler = () => {
+    useBooking(
+      bookedBy,
+      chosenTask,
+      end4real,
+      startDate,
+      message,
+      checkedItems[1],
+      checkedItems[0],
+      checkedItems[2],
+      titleState
+    );
+  };
 
   return (
     <FormControl>
