@@ -20,8 +20,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TaskDropDown from "./TaskDropDown";
 import { Task, TimeslotProps } from "../../utils/types";
-import { setDate } from "date-fns";
+import { setDate, setHours, setMinutes } from "date-fns";
 import { useTask } from "../../hooks/useTask";
+import router, { useRouter } from "next/router";
+import { getDateForForm } from "../../utils/date";
 
 export type BookingType = {
   timeslot: TimeslotProps;
@@ -35,7 +37,9 @@ type SelectedTask = {
 
 const BookingForm = ({ timeslot, taskId }: BookingType) => {
   const tasks = useTask();
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    setHours(setMinutes(new Date(), 30), 12)
+  );
   const [titleState, setTitleState] = useState("");
   const [checkedItems, setCheckedItems] = useState([]);
   const [selectedTask, setSelectedTask] = useState<SelectedTask>({
@@ -50,6 +54,10 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
       _placeholder: "rgba(64,23,67,0.4)",
     }),
   };
+  const router = useRouter();
+
+  const queryParams = router.query;
+  const slot = JSON.parse(queryParams.slot as string);
 
   useEffect(() => {
     setSelectedTask({
@@ -57,6 +65,11 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
       value: taskId,
     });
   }, [tasks]);
+
+  useEffect(
+    () => setStartDate(getDateForForm(queryParams.date as string, slot.time)),
+    []
+  );
 
   return (
     <FormControl>
@@ -69,9 +82,15 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
           color="#401743"
         ></Input>
         <DatePicker
+          showTimeSelect
+          timeCaption="Time"
+          timeFormat="HH:mm"
+          minTime={setHours(setMinutes(new Date(), 0), 8)}
+          maxTime={setHours(setMinutes(new Date(), 0), 19)}
+          timeIntervals={60}
           selected={startDate}
           onChange={(date: Date) => setStartDate(date)}
-          dateFormat="dd/MM/yyyy"
+          dateFormat="dd/MM/yyyy HH:mm"
         />
         <HStack width="100%">
           //do we need a new get route for task/:id??
@@ -80,7 +99,7 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
             // defaultValue={taskId}
             onChange={(value) => setSelectedTask(value as SelectedTask)}
             chakraStyles={chakraStyles}
-            color="#401743"
+            colorScheme="#401743"
             // @ts-ignore
             // isMulti
             options={tasks.map((task) => ({

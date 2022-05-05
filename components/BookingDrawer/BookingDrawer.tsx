@@ -104,6 +104,7 @@ function BookingDrawer({
   const [selectedSlot, setSelectedSlot] = useState<TimeslotProps | null>(null);
   const [selectedTask, setSelectedTask] = useState<string | null>(null);
 
+  console.log(selectedDate);
   // array von ausgewählten timeslots, löschbar
   // same 4 tasks
   // durch states

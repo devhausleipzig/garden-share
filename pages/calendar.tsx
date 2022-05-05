@@ -65,7 +65,7 @@ const Calendar: NextPage = () => {
         </SimpleGrid>
         <BookingDrawer
           selectedDate={format(
-            new Date(getYear(new Date()), monthIndex, selectedDay),
+            new Date(getYear(new Date()), monthIndex - 1, selectedDay),
             "yyyy-MM-dd"
           )}
           isOpen={isOpen}
