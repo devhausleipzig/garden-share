@@ -1,3 +1,5 @@
+import { User } from "../context/authContext";
+
 export type Booking = {
   identifier: string;
   createdAt: Date;
@@ -39,4 +41,10 @@ export type TimeslotProps = {
   time: string;
   status: Status;
   bookedBy?: string;
+};
+
+export type MessageProps = {
+  title: string;
+  content: string;
+  author: User;
 };

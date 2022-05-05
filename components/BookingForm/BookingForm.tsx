@@ -25,6 +25,7 @@ import { useTask } from "../../hooks/useTask";
 import router, { useRouter } from "next/router";
 import { getDateForForm } from "../../utils/date";
 import { useBooking } from "../../hooks/useBooking";
+import { useAuth } from "../../context/authContext";
 
 export type BookingType = {
   timeslot: TimeslotProps;
@@ -79,6 +80,7 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
   let almostEnd = slot.time;
   let [start, end] = almostEnd.split(" - ");
   let end4real = new Date(Number(end.split(":")[0]));
+  // const { user } = useAuth();
 
   const clickHandler = () => {
     useBooking(

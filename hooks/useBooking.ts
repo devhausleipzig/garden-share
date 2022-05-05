@@ -1,5 +1,4 @@
 import { create } from "domain";
-import { Message } from "../components/MessageCard/MessageCard";
 import { Task } from "../utils/types";
 
 export const useBooking = (
@@ -24,6 +23,14 @@ export const useBooking = (
     title,
   };
 
+  let autoMessage: Message = {
+    title: title,
+    content: `${user} booked a public event!`,
+    author: bookedBy,
+    type: "SmallCard",
+    date: String(start),
+  }
+
   async function postBooking(bookedBy: string) {
     try {
       const booking = await fetch(
@@ -36,6 +43,19 @@ export const useBooking = (
       console.log("SUCCESSFULLY BOOKED");
     } catch (err) {
       console.log(err);
+    }
+  }
+  if(message) {
+    async function postMessage() {
+      try {
+        const message = await fetch(
+          'http://localhost:8000/messages',
+          {
+            method: "POST",
+            body: 
+          }
+        )
+      }
     }
   }
 };
