@@ -16,9 +16,9 @@ import {
 import { useRouter } from "next/router";
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import Tasks from "../../pages/tasks";
-import { Task } from "../../utils/types";
+import { Task, TimeslotProps } from "../../utils/types";
 import TaskSelector from "../TaskSelector/TaskSelector";
-import Timeslot, { TimeslotProps } from "../Timeslot/Timeslot";
+import Timeslot from "../Timeslot/Timeslot";
 
 export type BookingDrawerProps = {
   selectedDate: string;

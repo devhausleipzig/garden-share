@@ -15,7 +15,7 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TaskDropDown from "./TaskDropDown";
@@ -38,7 +38,10 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
   const [startDate, setStartDate] = useState(new Date());
   const [titleState, setTitleState] = useState("");
   const [checkedItems, setCheckedItems] = useState([]);
-  const [selectedTask, setSelectedTask] = useState<SelectedTask[]>([]);
+  const [selectedTask, setSelectedTask] = useState<SelectedTask>({
+    label: "loading",
+    value: taskId,
+  });
   const chakraStyles: ChakraStylesConfig = {
     container: (provided, state) => ({
       ...provided,
@@ -47,23 +50,13 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
       _placeholder: "rgba(64,23,67,0.4)",
     }),
   };
-  let pickedTask: SelectedTask[] = [
-    {
-      label: "",
-      value: "",
-    },
-  ];
-  // const date: Date = setDate(new Date(timeslot.time));
-  // console.log(date);
-  function chosenTask(travelTask: string) {
-    tasks.map((task) => {
-      if (task.identifier === travelTask) {
-        (pickedTask.label = task.type), (pickedTask.value = task.type);
-        setSelectedTask(pickedTask as SelectedTask[]);
-      }
+
+  useEffect(() => {
+    setSelectedTask({
+      label: tasks.find((task) => task.identifier === taskId)?.type!,
+      value: taskId,
     });
-  }
-  chosenTask(taskId);
+  }, [tasks]);
 
   return (
     <FormControl>
@@ -83,26 +76,17 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
         <HStack width="100%">
           //do we need a new get route for task/:id??
           <Select
-            onChange={(value) => setSelectedTask(value as SelectedTask[])}
+            value={selectedTask}
+            // defaultValue={taskId}
+            onChange={(value) => setSelectedTask(value as SelectedTask)}
             chakraStyles={chakraStyles}
             color="#401743"
             // @ts-ignore
-            isMulti
-            options={[
-              // map with task.ids?
-              {
-                label: "watering",
-                value: "watering",
-              },
-              {
-                label: "building",
-                value: "building",
-              },
-              {
-                label: "harvesting",
-                value: "harvesting",
-              },
-            ]}
+            // isMulti
+            options={tasks.map((task) => ({
+              label: task.type,
+              value: task.identifier,
+            }))}
           />
         </HStack>
         <HStack width="100%" justifyContent="space-between">
