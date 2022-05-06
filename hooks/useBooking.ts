@@ -29,7 +29,7 @@ export const useBooking = (
     author: bookedBy,
     type: "SmallCard",
     date: String(start),
-  }
+  };
 
   async function postBooking(bookedBy: string) {
     try {
@@ -45,16 +45,15 @@ export const useBooking = (
       console.log(err);
     }
   }
-  if(message) {
+  if (message) {
     async function postMessage() {
       try {
-        const message = await fetch(
-          'http://localhost:8000/messages',
-          {
-            method: "POST",
-            body: 
-          }
-        )
+        const message = await fetch("http://localhost:8000/messages", {
+          method: "POST",
+          body: JSON.stringify(autoMessage),
+        });
+      } catch (err) {
+        console.log(err);
       }
     }
   }
