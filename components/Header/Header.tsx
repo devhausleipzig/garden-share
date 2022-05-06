@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   HStack,
   Image,
   Menu,
@@ -12,8 +13,10 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { useAuth } from "../../context/authContext";
 
 export const Header = () => {
+  const { logout } = useAuth();
   return (
     <HStack as="header" bg="teal.300" justify="space-between" py={4} px={4}>
       <Box h={8} w={8}>
@@ -56,11 +59,7 @@ export const Header = () => {
           </MenuGroup>
           <MenuDivider />
           <MenuGroup title="Account">
-            <MenuItem>
-              <Link href="/">
-                <a>Logout</a>
-              </Link>
-            </MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
           </MenuGroup>
         </MenuList>
       </Menu>

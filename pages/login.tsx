@@ -16,6 +16,7 @@ import {
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { useAuth } from "../context/authContext";
+import { getToken } from "../utils/token";
 
 const Login = () => {
   const { login } = useAuth();
@@ -27,9 +28,9 @@ const Login = () => {
     r.push("signup");
   };
 
-  const loginHandler = (e: FormEvent) => {
+  const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
-    const user = login(email, password);
+    const user = await login(email, password);
     if (user) {
       r.push("/");
     } else {

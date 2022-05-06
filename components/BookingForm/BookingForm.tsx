@@ -37,8 +37,12 @@ type SelectedTask = {
   value: string;
 };
 
-const BookingForm = ({ timeslot, taskId }: BookingType) => {
+const BookingForm = ({ timeslot }: BookingType) => {
   const tasks = useTask();
+  const router = useRouter();
+  const queryParams = router.query;
+  const slot = JSON.parse(queryParams.slot as string);
+  const taskId = queryParams.task;
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 30), 12)
   );
@@ -46,7 +50,7 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
   const [checkedItems, setCheckedItems] = useState([]);
   const [selectedTask, setSelectedTask] = useState<SelectedTask>({
     label: "loading",
-    value: taskId,
+    value: taskId as string,
   });
   const chakraStyles: ChakraStylesConfig = {
     container: (provided, state) => ({
@@ -58,17 +62,14 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
   };
 
   // TASK ACTION //
-  const router = useRouter();
-  const queryParams = router.query;
-  const slot = JSON.parse(queryParams.slot as string);
 
   useEffect(() => {
+    let chosenTask = tasks.find((task) => task.identifier === taskId);
     setSelectedTask({
       label: chosenTask?.type!,
-      value: taskId,
+      value: taskId as string,
     });
   }, [tasks]);
-  let chosenTask: Task = tasks.find((task) => task.type === selectedTask.value);
 
   // DATE ACTION //
   useEffect(
@@ -85,7 +86,7 @@ const BookingForm = ({ timeslot, taskId }: BookingType) => {
   const clickHandler = () => {
     useBooking(
       bookedBy,
-      chosenTask,
+      tasks.find((task) => task.type === selectedTask.value),
       end4real,
       startDate,
       message,

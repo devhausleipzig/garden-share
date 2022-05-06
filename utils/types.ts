@@ -1,5 +1,3 @@
-import { User } from "../context/authContext";
-
 export type Booking = {
   identifier: string;
   createdAt: Date;
@@ -37,6 +35,8 @@ export type Repeats = "NONE" | "DAILY" | "WEEKLY" | "MONTHLY";
 
 export type Status = "free" | "booked";
 
+export type Role = "USER" | "ADMIN";
+
 export type TimeslotProps = {
   time: string;
   status: Status;
@@ -47,4 +47,13 @@ export type MessageProps = {
   title: string;
   content: string;
   author: User;
+};
+
+export type User = {
+  email: string;
+  identifier: string;
+  firstName: string;
+  lastName: string;
+  profilePicture: string;
+  role: Role;
 };

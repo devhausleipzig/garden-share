@@ -3,7 +3,7 @@ import { Task } from "../utils/types";
 
 export const useBooking = (
   bookedBy: string,
-  task: Task,
+  task: Task | undefined,
   end: Date,
   start: Date,
   message: Message,
@@ -48,7 +48,7 @@ export const useBooking = (
   if (message) {
     async function postMessage() {
       try {
-        const message = await fetch("http://localhost:8000/messages", {
+        const postMessage = await fetch("http://localhost:8000/messages", {
           method: "POST",
           body: JSON.stringify(autoMessage),
         });

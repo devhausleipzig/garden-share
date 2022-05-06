@@ -1,11 +1,10 @@
+import { useRouter } from "next/router";
 import React, { ReactNode, useContext, useState } from "react";
+import { getToken } from "../utils/token";
+import { User } from "../utils/types";
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
+export interface loginUser extends User {
   password: string;
-  role: "Admin" | "User";
 }
 
 export const useAuth = () => useContext(AuthContext);
@@ -13,8 +12,9 @@ export const useAuth = () => useContext(AuthContext);
 interface AuthContextValue {
   user: User | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => User | null;
+  login: (email: string, password: string) => Promise<User | null>;
   logout: () => void;
+  token: string;
 }
 
 const AuthContext = React.createContext<AuthContextValue>({
@@ -26,6 +26,7 @@ const AuthContext = React.createContext<AuthContextValue>({
   logout: () => {
     throw new Error("Function not implemented");
   },
+  token: "",
 });
 
 interface Props {
@@ -33,40 +34,41 @@ interface Props {
 }
 
 export const AuthProvider = ({ children }: Props) => {
+  const router = useRouter();
+  const tokenFromStorage = () => {
+    if (typeof window !== "undefined") {
+      return window.localStorage.getItem("token") || "";
+    }
+    return "";
+  };
   const [user, setUser] = useState<User | null>(null);
-
+  const [token, setToken] = useState(tokenFromStorage());
   const isAuthenticated = Boolean(user);
 
-  const login = (email: string, password: string) => {
-    if (email === "admin@rooted.de" && password === "password") {
-      const user: User = {
-        id: "123",
-        email,
-        password,
-        name: "Admin",
-        role: "Admin",
-      };
-      setUser(user);
-      return user;
-    }
-    if (email === "user@rooted.de" && password === "password") {
-      const user: User = {
-        id: "234",
-        email,
-        password,
-        name: "User",
-        role: "User",
-      };
-      setUser(user);
-      return user;
+  const login = async (email: string, password: string) => {
+    try {
+      const token = await getToken(email, password);
+      if (token) {
+        setUser(token.user);
+        return user;
+      }
+    } catch (err) {
+      console.log(err);
     }
     return null;
   };
 
-  const logout = () => setUser(null);
+  const logout = () => {
+    setUser(null);
+    setToken("");
+    if (typeof window !== "undefined") localStorage.removeItem("token");
+    router.push("/login");
+  };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, login, logout, token }}
+    >
       {children}
     </AuthContext.Provider>
   );
