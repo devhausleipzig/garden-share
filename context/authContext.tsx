@@ -41,16 +41,26 @@ export const AuthProvider = ({ children }: Props) => {
     }
     return "";
   };
-  const [user, setUser] = useState<User | null>(null);
+  const userFromStorage = () => {
+    if (typeof window !== "undefined") {
+      return (
+        (JSON.parse(window.localStorage.getItem("user") as string) as User) ||
+        null
+      );
+    }
+    return null;
+  };
+  const [user, setUser] = useState<User | null>(userFromStorage());
   const [token, setToken] = useState(tokenFromStorage());
   const isAuthenticated = Boolean(user);
 
   const login = async (email: string, password: string) => {
     try {
-      const token = await getToken(email, password);
-      if (token) {
-        setUser(token.user);
-        return user;
+      const result = await getToken(email, password);
+      if (result.user) {
+        setUser(result.user);
+        setToken(result.token);
+        return result.user;
       }
     } catch (err) {
       console.log(err);

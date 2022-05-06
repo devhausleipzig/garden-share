@@ -37,6 +37,8 @@ export type Status = "free" | "booked";
 
 export type Role = "USER" | "ADMIN";
 
+export type messageType = "SmallCard" | "LargeCard";
+
 export type TimeslotProps = {
   time: string;
   status: Status;
@@ -47,6 +49,7 @@ export type MessageProps = {
   title: string;
   content: string;
   author: User;
+  type: messageType;
 };
 
 export type User = {

@@ -1,40 +1,49 @@
 import { create } from "domain";
-import { Task } from "../utils/types";
+import { useEffect } from "react";
+import { MessageProps, Task, User } from "../utils/types";
 
 export const useBooking = (
-  bookedBy: string,
+  bookedBy: User,
   task: Task | undefined,
   end: Date,
   start: Date,
-  message: Message,
+
   overnight: boolean,
   isPrivate: boolean,
   published: boolean,
   title: string
 ) => {
+  let autoMessage: MessageProps = {
+    title: title,
+    content: `${bookedBy.firstName} booked a public event!`,
+    author: bookedBy,
+    type: "SmallCard",
+  };
   let data = {
     task,
     end,
     start,
-    message,
+    message: autoMessage,
     overnight,
     isPrivate,
     published,
     title,
   };
 
-  let autoMessage: Message = {
-    title: title,
-    content: `${user} booked a public event!`,
-    author: bookedBy,
-    type: "SmallCard",
-    date: String(start),
-  };
-
-  async function postBooking(bookedBy: string) {
+  async function publishMessage() {
+    try {
+      const postMessage = await fetch("http://localhost:8000/messages", {
+        method: "POST",
+        body: JSON.stringify(autoMessage),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function postBooking(userId: string) {
     try {
       const booking = await fetch(
-        `http://localhost:8000/user/${bookedBy}/bookings`,
+        `http://localhost:8000/user/${userId}/bookings`,
         {
           method: "POST",
           body: JSON.stringify(data),
@@ -45,16 +54,14 @@ export const useBooking = (
       console.log(err);
     }
   }
-  if (message) {
-    async function postMessage() {
-      try {
-        const postMessage = await fetch("http://localhost:8000/messages", {
-          method: "POST",
-          body: JSON.stringify(autoMessage),
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    }
+  if (published) {
+    useEffect(() => {
+      publishMessage();
+      postBooking(bookedBy.identifier);
+    }, []);
+  } else {
+    useEffect(() => {
+      postBooking(bookedBy.identifier);
+    }, []);
   }
 };

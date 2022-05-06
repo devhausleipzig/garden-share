@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TaskDropDown from "./TaskDropDown";
-import { Task, TimeslotProps } from "../../utils/types";
+import { Task, TimeslotProps, User } from "../../utils/types";
 import { setDate, setHours, setMinutes } from "date-fns";
 import { useTask } from "../../hooks/useTask";
 import router, { useRouter } from "next/router";
@@ -38,6 +38,7 @@ type SelectedTask = {
 };
 
 const BookingForm = ({ timeslot }: BookingType) => {
+  const { user } = useAuth();
   const tasks = useTask();
   const router = useRouter();
   const queryParams = router.query;
@@ -85,11 +86,10 @@ const BookingForm = ({ timeslot }: BookingType) => {
 
   const clickHandler = () => {
     useBooking(
-      bookedBy,
+      user as User,
       tasks.find((task) => task.type === selectedTask.value),
       end4real,
       startDate,
-      message,
       checkedItems[1],
       checkedItems[0],
       checkedItems[2],
@@ -138,7 +138,11 @@ const BookingForm = ({ timeslot }: BookingType) => {
           <Checkbox isChecked={checkedItems[0]}>Private?</Checkbox>
           <Checkbox isChecked={checkedItems[1]}>Overnight?</Checkbox>
           <Checkbox isChecked={checkedItems[2]}>Clip to Messageboard?</Checkbox>
-          <Button backgroundColor="#26BBAD" type="submit">
+          <Button
+            backgroundColor="#26BBAD"
+            type="submit"
+            onClick={clickHandler}
+          >
             submit
           </Button>
         </HStack>

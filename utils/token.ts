@@ -14,9 +14,10 @@ export async function getToken(email: string, passwordHash: string) {
     });
     const result = await response.json();
     console.log(result);
-    if (result.token) {
+    if (result.token && result.user) {
       if (typeof window !== undefined) {
         localStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
         return result;
       }
     }
