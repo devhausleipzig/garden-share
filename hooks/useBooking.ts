@@ -2,66 +2,64 @@ import { create } from "domain";
 import { useEffect } from "react";
 import { MessageProps, Task, User } from "../utils/types";
 
-export const useBooking = (
-  bookedBy: User,
-  task: Task | undefined,
-  end: Date,
-  start: Date,
-
-  overnight: boolean,
-  isPrivate: boolean,
-  published: boolean,
-  title: string
-) => {
+export async function publishMessage(title: string, bookedBy: User) {
   let autoMessage: MessageProps = {
     title: title,
     content: `${bookedBy.firstName} booked a public event!`,
     author: bookedBy,
     type: "SmallCard",
   };
+  try {
+    const postMessage = await fetch("http://localhost:8000/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(autoMessage),
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function postBooking(
+  bookedBy: User,
+  task: Task | undefined,
+  end: Date,
+  start: Date,
+  overnight: boolean,
+  isPrivate: boolean,
+  published: boolean,
+  title: string
+) {
   let data = {
-    task,
-    end,
-    start,
-    message: autoMessage,
+    task: task?.identifier || "",
+    end: end.toISOString(),
+    start: start.toISOString(),
     overnight,
     isPrivate,
     published,
     title,
   };
 
-  async function publishMessage() {
-    try {
-      const postMessage = await fetch("http://localhost:8000/messages", {
+  console.log(bookedBy);
+
+  try {
+    const booking = await fetch(
+      `http://localhost:8000/user/${bookedBy.identifier}/bookings`,
+      {
         method: "POST",
-        body: JSON.stringify(autoMessage),
-      });
-    } catch (err) {
-      console.log(err);
-    }
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    // if (published) {
+    //   publishMessage(title, bookedBy);
+    // }
+    console.log("SUCCESSFULLY BOOKED");
+  } catch (err) {
+    console.log(err);
   }
-  async function postBooking(userId: string) {
-    try {
-      const booking = await fetch(
-        `http://localhost:8000/user/${userId}/bookings`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-        }
-      );
-      console.log("SUCCESSFULLY BOOKED");
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  if (published) {
-    useEffect(() => {
-      publishMessage();
-      postBooking(bookedBy.identifier);
-    }, []);
-  } else {
-    useEffect(() => {
-      postBooking(bookedBy.identifier);
-    }, []);
-  }
-};
+}

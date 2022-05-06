@@ -24,11 +24,17 @@ export const getTime = (date: string) => {
 };
 export const currentMonth = new Date().getMonth() + 1;
 
-export function getDateForForm(datestring: string, timeslot: string): Date {
+export function getDateForForm(
+  datestring: string,
+  timeslot: string
+): { start: Date; end: Date } {
   const [start, end] = timeslot.split(" - ");
   const year = getYear(new Date(datestring));
   const month = getMonth(new Date(datestring));
   const day = getDate(new Date(datestring));
 
-  return new Date(year, month, day, Number(start.split(":")[0]), 0);
+  return {
+    start: new Date(year, month, day, Number(start.split(":")[0]), 0),
+    end: new Date(year, month, day, Number(end.split(":")[0]), 0),
+  };
 }

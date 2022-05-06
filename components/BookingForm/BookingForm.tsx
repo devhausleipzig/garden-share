@@ -24,7 +24,7 @@ import { setDate, setHours, setMinutes } from "date-fns";
 import { useTask } from "../../hooks/useTask";
 import router, { useRouter } from "next/router";
 import { getDateForForm } from "../../utils/date";
-import { useBooking } from "../../hooks/useBooking";
+import { postBooking } from "../../hooks/useBooking";
 import { useAuth } from "../../context/authContext";
 
 export type BookingType = {
@@ -74,21 +74,16 @@ const BookingForm = ({ timeslot }: BookingType) => {
 
   // DATE ACTION //
   useEffect(
-    () => setStartDate(getDateForForm(queryParams.date as string, slot.time)),
+    () =>
+      setStartDate(getDateForForm(queryParams.date as string, slot.time).start),
     []
   );
 
-  // BOOKING ACTION //
-  let almostEnd = slot.time;
-  let [start, end] = almostEnd.split(" - ");
-  let end4real = new Date(Number(end.split(":")[0]));
-  // const { user } = useAuth();
-
   const clickHandler = () => {
-    useBooking(
+    postBooking(
       user as User,
-      tasks.find((task) => task.type === selectedTask.value),
-      end4real,
+      tasks.find((task) => task.identifier === selectedTask.value),
+      getDateForForm(queryParams.date as string, slot.time).end,
       startDate,
       checkedItems[1],
       checkedItems[0],
