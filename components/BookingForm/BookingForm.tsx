@@ -90,6 +90,7 @@ const BookingForm = ({ timeslot }: BookingType) => {
       checkedItems[2],
       titleState
     );
+    router.push("calendar");
   };
 
   return (

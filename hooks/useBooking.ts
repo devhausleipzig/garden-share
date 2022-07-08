@@ -55,9 +55,6 @@ export async function postBooking(
         body: JSON.stringify(data),
       }
     );
-    // if (published) {
-    //   publishMessage(title, bookedBy);
-    // }
     console.log("SUCCESSFULLY BOOKED");
   } catch (err) {
     console.log(err);
